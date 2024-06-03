@@ -1,0 +1,304 @@
+<h6 class="mb-0 text-uppercase">Add Client </h6>
+<!-- <button mat-stroked-button color="primary" class=""  routerLink="/masters/client-list">Back</button> -->
+<hr>
+
+<mat-card>
+  <mat-card-content>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <mat-stepper formArrayName="formArray" #stepper>
+        <mat-step formGroupName="2" [stepControl]="formArray.get([2])" label="Personal Details">
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="personalId" required>
+          </mat-form-field> -->
+
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <!-- <mat-form-field appearance="outline">
+                <mat-label>Country</mat-label>
+                <input matInput formControlName="countryId" required>
+              </mat-form-field> -->
+              <mat-form-field appearance="outline"  >
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="countryId" name="countryId">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of countryService.countries" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Contact Name</mat-label>
+                <input matInput formControlName="contactName" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Contact Email</mat-label>
+                <input matInput formControlName="contactEmail">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Contact Number</mat-label>
+                <input matInput formControlName="contactNumber" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="mainAddress" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Contact Request Emails</mat-label>
+                <input matInput formControlName="contactReqEmails">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Postal Code</mat-label>
+                <input matInput formControlName="mainPostalCode" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Alert Emails</mat-label>
+                <input matInput formControlName="alertEmails" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Alternate Contact Number</mat-label>
+                <input matInput formControlName="alternateContactNum">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Alternate Contact Name</mat-label>
+                <input matInput formControlName="alternateContactName">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Alternate Contact Email</mat-label>
+                <input matInput formControlName="alternateContactEmail">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              
+                <mat-slide-toggle formControlName="isActive">Is Active</mat-slide-toggle>
+ 
+            </div>
+          </div>
+
+          <div>
+            
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Delivery Details">
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Collection Address</mat-label>
+                <input matInput formControlName="collctAddress" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Collection Postal Code</mat-label>
+                <input matInput formControlName="collctPostalCode" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Warehouse Emails</mat-label>
+                <input matInput formControlName="warehouseEmail" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Product Category</mat-label>
+                <input matInput formControlName="categoryId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Fuel Surcharge(%)</mat-label>
+                <input matInput formControlName="fuelSurcharge">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Delivery Instructions</mat-label>
+                <input matInput formControlName="delInstruction">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Delivery Status </mat-label>
+                <input matInput formControlName="delStatusId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Default Drop Time</mat-label>
+                <input matInput formControlName="dropTime" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Default Item Weight</mat-label>
+                <input matInput formControlName="itemWeight">
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step formGroupName="0" [stepControl]="formArray.get([0])" label="Account Details">
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Account Number</mat-label>
+                <input matInput formControlName="accNmbr" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Account Reference</mat-label>
+                <input matInput formControlName="accRefrnc">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Credit Limit</mat-label>
+                <input matInput formControlName="credLimit">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Invoice TermId</mat-label>
+                <input matInput formControlName="termId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Invoice Address</mat-label>
+                <input matInput formControlName="address" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Invoice Postal Code</mat-label>
+                <input matInput formControlName="postalCode" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Invoice Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+
+
+        <mat-step formGroupName="3" [stepControl]="formArray.get([3])" label="Settings">
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="ownLabels">Point Own Labels</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="ownPaperWork">Attach Own Paper Work</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="warehouseTab">Allow Warehouse Tab</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="serviceLevel">Service Level</mat-slide-toggle>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="delPoint">Delivery Point</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="unpacked">Unpacked Items</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="packageAway">Take Packaging Away</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="assemble">Assemble</mat-slide-toggle>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="disassemeble">Disassemeble</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="collectDisposal">Collect Disposal</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="disclaimer">Pod Disclaimer</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="logoUrl">Pod Logo Url</mat-slide-toggle>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="invoiceForced">Invoice Forced</mat-slide-toggle>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-slide-toggle formControlName="podInvoice">Pod with Invoice</mat-slide-toggle>
+            </div>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Logo Path</mat-label>
+            <input matInput formControlName="logoPath" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button type="submit" [disabled]="!formGroup.valid">Submit</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
+
+  </mat-card-content>
+</mat-card>

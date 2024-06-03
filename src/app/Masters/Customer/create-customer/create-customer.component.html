@@ -1,0 +1,170 @@
+<!-- <div class="row g-4"> -->
+    <div class="container">
+
+        <div class="col-12 col-xl-12">
+    
+                    <div class="row">
+                        <div class="col-11">
+                            <h5 class="mb-3"> {{ title }}</h5>
+                        </div>
+                        <div class="col-1">
+                            <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                        </div>
+                    </div>
+    
+                    <form [formGroup]="form">
+                        <div class="row g-3">
+                            <div  style="font-size: 12px;"class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Customer Type</mat-label>
+                                    <mat-select formControlName="customerType" required>
+                                      @for (cust of custType; track cust) {
+                                      <mat-option [value]="cust">{{cust.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Company Name</mat-label>
+                                    <input matInput formControlName="companyName">
+                                </mat-form-field>
+                            </div>
+                           </div>
+
+                           <div class="row g-3">
+                            
+                            <div class="col-3 col-md-3 col-lg-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Customer Phone</mat-label>
+                                    <input matInput formControlName="customerPhone">
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="col-3 col-md-3 col-lg-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Customer Mobile</mat-label>
+                                    <input matInput formControlName="customerMobile">
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Customer Email</mat-label>
+                                    <input matInput formControlName="customerEmail">
+                                </mat-form-field>
+                            </div>
+                           </div>
+
+                           <div class="row g-3">
+                            
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Language</mat-label>
+                                    <mat-select formControlName="language">
+                                      @for (data of languageArray; track data) {
+                                      <mat-option [value]="data">{{data.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <mat-select formControlName="country">
+                                      @for (cntry of countryList; track cntry) {
+                                      <mat-option [value]="cntry">{{cntry.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                           </div>
+
+                           <div class="row g-3">
+                            
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <mat-select formControlName="state" (selectionChange)="stateSelect($event)">
+                                      @for (state of stateList; track state) {
+                                      <mat-option [value]="state">{{state.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <mat-select formControlName="city">
+                                      @for (city of  cityList; track city) {
+                                      <mat-option [value]="city">{{city.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                           </div>
+
+                           <div class="row g-3">
+                            
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Postal Code</mat-label>
+                                    <mat-select formControlName="postalCode">
+                                      @for (postCode of postCodeArray; track postCode) {
+                                      <mat-option [value]="postCode">{{postCode.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Address 1</mat-label>
+                                    <textarea cdkTextareaAutosize
+                                    cdkAutosizeMinRows="1"
+                                    cdkAutosizeMaxRows="5" matInput formControlName="address1"></textarea>
+                                </mat-form-field>
+                            </div>
+                           
+                           </div>
+
+                           <div class="row g-3">
+                           
+
+                            <div class="col-6 col-md-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Address 2</mat-label>
+                                    <textarea cdkTextareaAutosize
+                                    cdkAutosizeMinRows="1"
+                                    cdkAutosizeMaxRows="5" matInput formControlName="address2"></textarea>
+                                </mat-form-field>
+                            </div>
+                        
+
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Landmark</mat-label>
+                                <textarea cdkTextareaAutosize
+                                cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="5" matInput formControlName="landmark"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                           <div class="row btn-class">
+                            <div class="col-12 col-md-12 ">
+                                <div class="d-flex gap-3 btn-class">
+                                    <button [disabled]="!form.valid"
+                                    mat-flat-button color="success" class="px-4" type="button"
+                                        (click)="SubmitForm()">Submit</button>
+                                </div>
+                            </div>
+                           </div>
+                    </form>
+                
+        </div>
+    </div>

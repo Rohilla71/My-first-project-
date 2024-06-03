@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SidebarService } from './../sidebar/sidebar.service'
+import { SideMenu, SideMenuResponse } from 'src/app/Interfaces/SideMenu';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { SidebarService } from './../sidebar/sidebar.service'
 
 export class SidebarComponent implements OnInit {
 
-  
+  sideMenuList: SideMenu[]
     constructor(public sidebarservice: SidebarService
       ) { }
 
@@ -20,6 +21,10 @@ export class SidebarComponent implements OnInit {
       }
   
     ngOnInit() {
+        this.sidebarservice.getMenuList().subscribe((res:SideMenuResponse)=> {
+            
+            this.sideMenuList =res.data
+        })
     }
 
 }

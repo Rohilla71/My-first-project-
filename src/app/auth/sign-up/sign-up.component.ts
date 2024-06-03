@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -8,15 +11,51 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+  errors: string[] | null = null;
+  signUpForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
+    isActive: new FormControl(true)
+  })
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute,private authService:AuthService,
+    private snackBar: MatSnackBar
+  ) {
+
+    
+   }
+
 
   // On Signup link click
-  onSignIn() {
-    this.router.navigate(['sign-in'], { relativeTo: this.route.parent });
+  onSubmit() {
+    this.authService.register(this.signUpForm.value)
+    
+    .subscribe({
+      complete: () => {  }, 
+      error: (error) => {  
+        
+        console.log(error)
+        this.showSnackbarTopPosition(error.error,'Error','2000') 
+      },   
+      next: () => {  
+        this.showSnackbarTopPosition('User created successfully !!!','Success','2000') 
+       },     // nextHandler
+  });
+  // .subscribe(res=>{
+  //       console.log(res)
+  //   })
   }
 
   ngOnInit(): void {
+  }
+
+  showSnackbarTopPosition(content, action, duration) {
+    this.snackBar.open(content, action, {
+      duration: 2000,
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
   }
 
   

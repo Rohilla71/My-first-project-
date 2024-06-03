@@ -9,6 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ListComponent } from './list/list.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { UnitListComponent } from './unit-list/unit-list.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,18 @@ const routes: Routes = [
         component: ButtonsComponent,
         data: {
           title: 'buttons'
+        }
+      }
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {
+        path: 'unitlist',
+        component: UnitListComponent,
+        data: {
+          title: 'unit list'
         }
       }
     ]

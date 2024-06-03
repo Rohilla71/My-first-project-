@@ -1,0 +1,98 @@
+<!-- <div class="row g-4"> -->
+    <div class="container ">
+        <div class="col-12 col-xl-12">
+            <br>
+            <mat-card>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-11">
+                            <h5 class="mb-3">State Form</h5>
+                        </div>
+                        <div class="col-1 close-button">
+                            <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                        </div>
+                    </div>
+    
+                    <form [formGroup]="stateForm">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="name" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Code</mat-label>
+                                    <input matInput formControlName="code" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <mat-select [(ngModel)]="selectedCountry" [formControlName]="'countryId'">
+                                        <ng-container *ngFor="let item of countryList">
+                                            <mat-option [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>GST Code</mat-label>
+                                    <input matInput formControlName="gstCode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Latitude</mat-label>
+                                    <input matInput formControlName="latitude" />
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="col-12 col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Longitude</mat-label>
+                                    <input matInput formControlName="longitude" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <section class="example-section">
+                                    <mat-slide-toggle 
+                                    formControlName="isActive"
+                                    (change)="isactiveChange($event)"
+                                        class="example-margin"
+                                        [color]="color"
+                                        [checked]="checked"
+                                        [disabled]="disabled"
+                                        labelPosition="before">
+                                        IsActive :
+                                    </mat-slide-toggle>
+                                  </section>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="d-flex gap-3 button-container">
+                                <button mat-flat-button color="success" class="px-4" type="button" (click)="SubmitForm()">
+                                    Submit
+                                </button>
+                                <button mat-stroked-button class="px-4" (click)="Reset()">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <!-- </div> -->

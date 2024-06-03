@@ -1,0 +1,301 @@
+{
+  "success": true,
+  "message": "Menus retrieved successfully.",
+  "data": [
+    {
+      "id": 4,
+      "name": "Configuration",
+      "submenuDetails": [
+        {
+          "id": 7,
+          "name": "City",
+          "parentId": 4,
+          "sequence": 4,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/city-list",
+          "isActive": true
+        },
+        {
+          "id": 8,
+          "name": "Country",
+          "parentId": 4,
+          "sequence": 5,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/country-list",
+          "isActive": true
+        },
+        {
+          "id": 9,
+          "name": "Currency",
+          "parentId": 4,
+          "sequence": 6,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "isActive": false
+        },
+        {
+          "id": 10,
+          "name": "Delivery Status",
+          "parentId": 4,
+          "sequence": 7,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 11,
+          "name": "Department",
+          "parentId": 4,
+          "sequence": 8,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 12,
+          "name": "Designation",
+          "parentId": 4,
+          "sequence": 9,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 13,
+          "name": "Invoice Term",
+          "parentId": 4,
+          "sequence": 10,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 14,
+          "name": "Language",
+          "parentId": 4,
+          "sequence": 11,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 15,
+          "name": "Location",
+          "parentId": 4,
+          "sequence": 12,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 16,
+          "name": "Measurement",
+          "parentId": 4,
+          "sequence": 13,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 17,
+          "name": "Postal Code",
+          "parentId": 4,
+          "sequence": 14,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 18,
+          "name": "Postal Charge Category",
+          "parentId": 4,
+          "sequence": 15,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 19,
+          "name": "State",
+          "parentId": 4,
+          "sequence": 16,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/state-list"
+        },
+        {
+          "id": 20,
+          "name": "Vehical Size",
+          "parentId": 4,
+          "sequence": 17,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 21,
+          "name": "Vehical",
+          "parentId": 4,
+          "sequence": 18,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 22,
+          "name": "Route",
+          "parentId": 4,
+          "sequence": 19,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 23,
+          "name": "Retailer",
+          "parentId": 4,
+          "sequence": 20,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 24,
+          "name": "Supplier",
+          "parentId": 4,
+          "sequence": 21,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 25,
+          "name": "Depot",
+          "parentId": 4,
+          "sequence": 22,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 26,
+          "name": "Employee Role",
+          "parentId": 4,
+          "sequence": 23,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 27,
+          "name": "Employee",
+          "parentId": 4,
+          "sequence": 24,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 28,
+          "name": "Time Service",
+          "parentId": 4,
+          "sequence": 25,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        }
+      ],
+      "isActive": true,
+      "parentId": 0,
+      "sequence": 1,
+      "iconUrl": null,
+      "iconClass": "settings",
+      "createdBy": 1,
+      "updatedBy": 0,
+      "nevigateUrl": "#"
+    },
+    {
+      "id": 5,
+      "name": "Access",
+      "submenuDetails": [
+        {
+          "id": 29,
+          "name": "Role",
+          "parentId": 5,
+          "sequence": 26,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 30,
+          "name": "Role Permissions",
+          "parentId": 5,
+          "sequence": 27,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 32,
+          "name": "User",
+          "parentId": 5,
+          "sequence": 28,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        },
+        {
+          "id": 31,
+          "name": "Role Control Permissions",
+          "parentId": 5,
+          "sequence": 28,
+          "iconUrl": null,
+          "iconClass": "arrow_right"
+        }
+      ],
+      "isActive": true,
+      "parentId": 0,
+      "sequence": 2,
+      "iconUrl": null,
+      "iconClass": "lock",
+      "createdBy": 1,
+      "updatedBy": 0,
+      "nevigateUrl": "#"
+    },
+    {
+      "id": 6,
+      "name": "Client",
+      "submenuDetails": [
+        {
+          "id": 33,
+          "name": "Client",
+          "parentId": 6,
+          "sequence": 29,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/client-list",
+          "isActive": true
+        },
+        {
+          "id": 36,
+          "name": "Customer",
+          "parentId": 11,
+          "sequence": 33,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/customer-list",
+          "isActive": true
+        },
+        {
+          "id": 34,
+          "name": "Product",
+          "parentId": 6,
+          "sequence": 30,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/product-list"
+        },
+        {
+          "id": 35,
+          "name": "Order",
+          "parentId": 6,
+          "sequence": 31,
+          "iconUrl": null,
+          "iconClass": "arrow_right",
+          "navigateUrl":"masters/order-list"
+        }
+      ],
+      "isActive": true,
+      "parentId": 0,
+      "sequence": 3,
+      "iconUrl": null,
+      "iconClass": "account_circle",
+      "createdBy": 1,
+      "updatedBy": 0,
+      "nevigateUrl": "#"
+    }
+  ],
+  "errors": []
+}

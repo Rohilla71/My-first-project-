@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -6,20 +6,23 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { MatModule } from '../appModules/mat.module';
-import { StepperOverviewExample } from './project-stepper/project-stepper.component';
+import { UnitListComponent } from './unit-list/unit-list.component';
+import { UnitListService } from './unit-list.service';
+import { CreateUnitListComponent } from './create-unit-list/create-unit-list.component';
 
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
     AnalyticsComponent, 
     ECommerceComponent,
-    StepperOverviewExample
+    UnitListComponent,
+    CreateUnitListComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     MatModule
-  ]
+  ],
+  providers: []
 })
 export class DashboardModule { }

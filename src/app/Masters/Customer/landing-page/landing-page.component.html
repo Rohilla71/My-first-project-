@@ -1,0 +1,251 @@
+<div class="container">
+
+    <mat-card class="mat-card-margin">
+        <mat-card-content>
+            <fieldset class="fieldset-class">
+            <legend>Basic Details</legend>
+            <div *ngIf="!isEditable" class="row g-3 row-bottom ">
+                <div class="col-4 col-md-4 col-lg-4">
+                        <mat-label class="label-class">Customer Type:</mat-label>
+                        <mat-label>{{ customerType }}</mat-label>
+                    
+                </div>
+                <div class="col-4 col-md-4 col-lg-4">
+                    <mat-label class="label-class">Company Name:</mat-label>
+                    <mat-label>{{ compName }}</mat-label>
+                
+            </div>
+            <div class="col-4 col-md-4 col-lg-4">
+                <mat-label class="label-class">Customer Email</mat-label>
+                <mat-label>{{ custEmail }}</mat-label>
+            </div>
+</div>
+
+<div *ngIf="!isEditable" class="row g-3 row-bottom">
+    <div class="col-4 col-md-4 col-lg-4">
+        <mat-label class="label-class">Customer Phone:</mat-label>
+        <mat-label>{{ custPhone }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">Customer Mobile:</mat-label>
+    <mat-label>{{ custMobile }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">Language</mat-label>
+    <mat-label>{{ lang }}</mat-label>
+</div>
+</div>
+
+<div *ngIf="!isEditable" class="row g-3 row-bottom">
+    <div class="col-4 col-md-4 col-lg-4">
+        <mat-label class="label-class">Country:</mat-label>
+        <mat-label>{{ country }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">State:</mat-label>
+    <mat-label>{{ state }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">City</mat-label>
+    <mat-label>{{ city }}</mat-label>
+</div>
+</div>
+
+<div *ngIf="!isEditable" class="row g-3 row-bottom">
+    <div class="col-4 col-md-4 col-lg-4">
+        <mat-label class="label-class">Postal Code:</mat-label>
+        <mat-label>{{ postalCode }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">Address1:</mat-label>
+    <mat-label>{{ address1 }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <mat-label class="label-class">Address2</mat-label>
+    <mat-label>{{ address2 }}</mat-label>
+</div>
+</div>
+
+<div *ngIf="!isEditable" class="row g-3 row-bottom">
+    <div class="col-8 col-md-8 col-lg-8">
+        <mat-label class="label-class">Landmark:</mat-label>
+        <mat-label>{{ landmark }}</mat-label>
+</div>
+
+<div class="col-4 col-md-4 col-lg-4">
+    <button          mat-flat-button color="success" class="px-4" type="button"
+                                        (click)="EditBasicDetails()">Edit</button>
+</div>
+</div>
+           
+<form [formGroup]="form" *ngIf="isEditable">
+
+    <div class="row g-3">
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Customer Type</mat-label>
+                <mat-select formControlName="customerType" required>
+                  @for (cust of custType; track cust) {
+                  <mat-option [value]="cust">{{cust.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="companyName">
+            </mat-form-field>
+        </div>
+        
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Customer Phone</mat-label>
+                <input matInput formControlName="customerPhone">
+            </mat-form-field>
+
+        </div>
+        </div>
+
+        <div class="row g-3">
+
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Customer Mobile</mat-label>
+                <input matInput formControlName="customerMobile">
+            </mat-form-field>
+
+        </div>
+
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Customer Email</mat-label>
+                <input matInput formControlName="customerEmail">
+            </mat-form-field>
+        </div>
+        
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Language</mat-label>
+                <mat-select formControlName="language">
+                  @for (data of languageArray; track data) {
+                  <mat-option [value]="data">{{data.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+        </div>
+        <div class="row g-3">
+        
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                  @for (cntry of countryList; track cntry) {
+                  <mat-option [value]="cntry">{{cntry.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+        
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="state" (selectionChange)="stateSelect($event)">
+                  @for (state of stateList; track state) {
+                  <mat-option [value]="state">{{state.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>City</mat-label>
+                <mat-select formControlName="city">
+                  @for (city of  cityList; track city) {
+                  <mat-option [value]="city">{{city.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+       </div>
+
+       <div class="row g-3">
+        
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Postal Code</mat-label>
+                <mat-select formControlName="postalCode">
+                  @for (postCode of postCodeArray; track postCode) {
+                  <mat-option [value]="postCode">{{postCode.name}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </div>
+
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Address 1</mat-label>
+                <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" matInput formControlName="address1"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="col-4 col-md-4 col-lg-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Address 2</mat-label>
+                <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" matInput formControlName="address2"></textarea>
+            </mat-form-field>
+        </div>
+    
+</div>
+
+<div class="row g-3">
+    <div class="col-4 col-md-4 col-lg-4">
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Landmark</mat-label>
+            <textarea cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5" matInput formControlName="landmark"></textarea>
+        </mat-form-field>
+    </div>
+    
+    <div class="col-4 col-md-4 ">
+        <div class="d-flex gap-3 btn-class">
+            <button [disabled]="!form.valid"
+            mat-flat-button color="success" class="px-4" type="button"
+                (click)="SubmitForm()">Submit</button>
+        </div>
+    </div>
+</div>
+       
+       </form>
+    </fieldset>
+</mat-card-content>
+</mat-card>
+
+       </div>
+
+       <mat-tab-group dynamicHeight>
+        <mat-tab label="Other Details"> <ng-template matTabContent>
+            <app-other-details-tab></app-other-details-tab>
+        </ng-template> </mat-tab>
+        <mat-tab label="Documents"> <ng-template matTabContent>
+        <app-documents-upload></app-documents-upload>
+    </ng-template> </mat-tab>
+        <mat-tab label="Address"> Address </mat-tab>
+        <mat-tab label="Contact Persons"> Contact Persons </mat-tab>
+        <mat-tab label="Supplier"> Supplier </mat-tab>
+        <mat-tab label="Settings"> Settings </mat-tab>
+        <mat-tab label="Remarks"> Remarks </mat-tab>
+      </mat-tab-group>

@@ -15,6 +15,8 @@ import { CoverForgotPasswordComponent } from './cover-forgot-password/cover-forg
 import { CoverResetPasswordComponent } from './cover-reset-password/cover-reset-password.component';
 import { CoverSigninComponent } from './cover-signin/cover-signin.component';
 import { CoverSignupComponent } from './cover-signup/cover-signup.component';
+import { AuthService } from './auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,6 +33,7 @@ import { CoverSignupComponent } from './cover-signup/cover-signup.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AuthRoutingModule,
     MatModule,
     CoverSigninComponent,
@@ -38,6 +41,7 @@ import { CoverSignupComponent } from './cover-signup/cover-signup.component';
     CoverForgotPasswordComponent,
     CoverResetPasswordComponent
 
-  ]
+  ],
+  providers:[]
 })
 export class AuthModule { }

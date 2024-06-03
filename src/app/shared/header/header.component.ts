@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppIcon } from './app-icon';
 import { SidebarService } from './../sidebar/sidebar.service'
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 
@@ -13,7 +14,7 @@ import { SidebarService } from './../sidebar/sidebar.service'
 
 export class HeaderComponent implements OnInit {
 
-  constructor( public sidebarservice: SidebarService ) {
+  constructor( public sidebarservice: SidebarService , private authService: AuthService) {
 
   }
 
@@ -82,6 +83,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   
 
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

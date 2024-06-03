@@ -1,5 +1,6 @@
 <header class="top-header mat-elevation-z5" [class.hidden]="toggleSearch" [ngClass]="{'test' : getSideBarSate()}">
   <div class="flex-grow-1 gap-1 d-flex align-items-center">
+    <img src="assets/images/app/favicon.ico" *ngIf="sidebarservice.getSidebarState()">
     <button mat-icon-button (click)="toggleSidebar()" >
       <mat-icon class="material-icons-outlined">menu</mat-icon>
     </button>
@@ -152,9 +153,10 @@
         <span>Downloads</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item>
+
+      <button mat-menu-item (click)="logout()">
         <mat-icon class="material-icons-outlined">logout</mat-icon>
-        <span>Logout</span>
+        <span>Logouts</span>
       </button>
     </mat-menu>
   </div>

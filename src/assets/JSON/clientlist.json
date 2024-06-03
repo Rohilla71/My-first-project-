@@ -1,0 +1,178 @@
+{
+    "success": true,
+    "message": "Client list retrieved successfully.",
+    "data": [
+      {
+        "accountDetails": {
+          "accountNumber": "112636161123",
+          "accountReference": "znxcvnz11",
+          "creditLimit": 200033,
+          "invoiceTermId": 1,
+          "invoiceAddress": "string",
+          "invoicePostalCode": "string",
+          "invoiceEmails": "string"
+        },
+        "deliveryDetails": {
+          "collectionAddress": "string",
+          "collectionPostalCode": "string",
+          "warehouseContactEmails": "string",
+          "productChargeCategoryIds": "string",
+          "fuleSurchargePercent": 10,
+          "defaultDeliveryInstructions": "string",
+          "defaultDeliveryStatusId": 1,
+          "defaultDropTime": "2024-05-17T00:00:00",
+          "defaultItemWeight": 40
+        },
+        "personalDetails": {
+          "id": 2,
+          "name": "Arielupdated22",
+          "countryId": 1,
+          "mainContactName": "ahsdfhaaa",
+          "mainContactEmail": "string",
+          "mainContactNumber": "1131213451",
+          "mainAddress": "string",
+          "contactRequestEmails": "string",
+          "mainPostalCode": null,
+          "alertEmails": "string",
+          "alternateContactNumber": "123611121",
+          "alternateContactName": "adgaaaada",
+          "alternateContactEmail": "asd@123.com",
+          "createdBy": 1,
+          "updatedBy": 2,
+          "isActive": true
+        },
+        "setting": {
+          "isPointOwnLabels": true,
+          "isAttachOwnPaperWork": true,
+          "isAllowWarehouseTab": true,
+          "isServiceLevel": true,
+          "isDeliveryPoint": true,
+          "isUnpackItems": true,
+          "isTakePackagingAway": true,
+          "isAssemble": true,
+          "isDisassemble": true,
+          "isCollectDisposal": true,
+          "podDisclaimer": "string",
+          "podLogoUrl": "string",
+          "isInvoiceForced": true,
+          "isPodWithInvoice": true,
+          "logoPath": "string"
+        }
+      },
+      {
+        "accountDetails": {
+          "accountNumber": "112636161123",
+          "accountReference": "znxcvnz",
+          "creditLimit": 2000,
+          "invoiceTermId": 1,
+          "invoiceAddress": "string",
+          "invoicePostalCode": "string",
+          "invoiceEmails": "string"
+        },
+        "deliveryDetails": {
+          "collectionAddress": "string",
+          "collectionPostalCode": "string",
+          "warehouseContactEmails": "string",
+          "productChargeCategoryIds": "string",
+          "fuleSurchargePercent": 10,
+          "defaultDeliveryInstructions": "string",
+          "defaultDeliveryStatusId": 1,
+          "defaultDropTime": "2024-05-17T00:00:00",
+          "defaultItemWeight": 40
+        },
+        "personalDetails": {
+          "id": 4,
+          "name": "Positive",
+          "countryId": 1,
+          "mainContactName": "ahsdfhaaa",
+          "mainContactEmail": "faasgd@12.com",
+          "mainContactNumber": "1131213451",
+          "mainAddress": "string",
+          "contactRequestEmails": "string",
+          "mainPostalCode": "string",
+          "alertEmails": "string",
+          "alternateContactNumber": "123611121",
+          "alternateContactName": "adgaaaada",
+          "alternateContactEmail": "asd@123.com",
+          "createdBy": 1,
+          "updatedBy": 0,
+          "isActive": true
+        },
+        "setting": {
+          "isPointOwnLabels": true,
+          "isAttachOwnPaperWork": true,
+          "isAllowWarehouseTab": true,
+          "isServiceLevel": true,
+          "isDeliveryPoint": true,
+          "isUnpackItems": true,
+          "isTakePackagingAway": true,
+          "isAssemble": true,
+          "isDisassemble": true,
+          "isCollectDisposal": true,
+          "podDisclaimer": "string",
+          "podLogoUrl": "string",
+          "isInvoiceForced": true,
+          "isPodWithInvoice": true,
+          "logoPath": "string"
+        }
+      },
+      {
+        "accountDetails": {
+          "accountNumber": "112636161123",
+          "accountReference": "znxcvnz",
+          "creditLimit": 2000,
+          "invoiceTermId": 1,
+          "invoiceAddress": "string",
+          "invoicePostalCode": "string",
+          "invoiceEmails": "string"
+        },
+        "deliveryDetails": {
+          "collectionAddress": "string",
+          "collectionPostalCode": "string",
+          "warehouseContactEmails": "string",
+          "productChargeCategoryIds": "string",
+          "fuleSurchargePercent": 10,
+          "defaultDeliveryInstructions": "string",
+          "defaultDeliveryStatusId": 1,
+          "defaultDropTime": "2024-05-17T00:00:00",
+          "defaultItemWeight": 40
+        },
+        "personalDetails": {
+          "id": 5,
+          "name": "test",
+          "countryId": 1,
+          "mainContactName": "ahsdfhaaa",
+          "mainContactEmail": "faasgd@12.com",
+          "mainContactNumber": "1131213451",
+          "mainAddress": "string",
+          "contactRequestEmails": "string",
+          "mainPostalCode": "string",
+          "alertEmails": "string",
+          "alternateContactNumber": "123611121",
+          "alternateContactName": "adgaaaada",
+          "alternateContactEmail": "asd@123.com",
+          "createdBy": 1,
+          "updatedBy": 0,
+          "isActive": true
+        },
+        "setting": {
+          "isPointOwnLabels": true,
+          "isAttachOwnPaperWork": true,
+          "isAllowWarehouseTab": true,
+          "isServiceLevel": true,
+          "isDeliveryPoint": true,
+          "isUnpackItems": true,
+          "isTakePackagingAway": true,
+          "isAssemble": true,
+          "isDisassemble": true,
+          "isCollectDisposal": true,
+          "podDisclaimer": "string",
+          "podLogoUrl": "string",
+          "isInvoiceForced": true,
+          "isPodWithInvoice": true,
+          "logoPath": "string"
+        }
+      }
+    ],
+    "errors": []
+  }

@@ -1,191 +1,291 @@
-<p>Basic Form Elements</p>
+<p>Client Register</p>
 <hr>
-
 <mat-card>
-    <mat-card-content>
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Leave a comment</mat-label>
-              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-          </form>
-    </mat-card-content>
-</mat-card>
+  <mat-card-content>
 
-<br>
-<p>With Icons</p>
-<hr>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <mat-stepper formArrayName="formArray" #stepper>
+        <mat-step formGroupName="0" [stepControl]="formArray.get([0])" label="Account Details">
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Account Number</mat-label>
+                <input matInput formControlName="accNmbr" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Account Reference</mat-label>
+                <input matInput formControlName="accRefrnc">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Credit Limit</mat-label>
+                <input matInput formControlName="credLimit">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Invoice TermId</mat-label>
+                <input matInput formControlName="termId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Invoice Address</mat-label>
+                <input matInput formControlName="address" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Invoice Postal Code</mat-label>
+                <input matInput formControlName="postalCode" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field>
+            <mat-label>Invoice Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Delivery Details">
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Collection Address</mat-label>
+                <input matInput formControlName="collctAddress" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Collection Postal Code</mat-label>
+                <input matInput formControlName="collctPostalCode" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Warehouse Emails</mat-label>
+                <input matInput formControlName="warehouseEmail" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Product Category</mat-label>
+                <input matInput formControlName="categoryId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Fuel Surcharge(%)</mat-label>
+                <input matInput formControlName="fuelSurcharge">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Delivery Instructions</mat-label>
+                <input matInput formControlName="delInstruction">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Delivery Status </mat-label>
+                <input matInput formControlName="delStatusId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Default Drop Time</mat-label>
+                <input matInput formControlName="dropTime" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Default Item Weight</mat-label>
+                <input matInput formControlName="itemWeight">
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="2" [stepControl]="formArray.get([2])" label="Personal Details">
+          <!-- <mat-form-field>
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="personalId" required>
+          </mat-form-field> -->
 
-<mat-card>
-    <mat-card-content>
-    <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Fill form field</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Country ID</mat-label>
+                <input matInput formControlName="countryId" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Contact Name</mat-label>
+                <input matInput formControlName="contactName" required>
+              </mat-form-field>
+            </div>
+          </div>
 
-      <p>
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Fill form field</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>account_circle</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>search</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-    </mat-card-content>
-</mat-card>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Contact Email</mat-label>
+                <input matInput formControlName="contactEmail">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Contact Number</mat-label>
+                <input matInput formControlName="contactNumber" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="mainAddress" required>
+              </mat-form-field>
+            </div>
+          </div>
 
-<br>
-<p>Form Select</p>
-<hr>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Contact Request Emails</mat-label>
+                <input matInput formControlName="contactReqEmails">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Postal Code</mat-label>
+                <input matInput formControlName="mainPostalCode" required>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Alert Emails</mat-label>
+                <input matInput formControlName="alertEmails" required>
+              </mat-form-field>
+            </div>
+          </div>
 
-<mat-card>
-    <mat-card-content>
-    <mat-form-field appearance="fill" class="w-100">
-        <mat-label>State</mat-label>
-        <mat-select>
-          <mat-option>None</mat-option>
-          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Alternate Contact Number</mat-label>
+                <input matInput formControlName="alternateContactNum">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Alternate Contact Name</mat-label>
+                <input matInput formControlName="alternateContactName">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              <mat-form-field>
+                <mat-label>Alternate Contact Email</mat-label>
+                <input matInput formControlName="alternateContactEmail">
+              </mat-form-field>
+            </div>
+          </div>
 
-      <br>
+          <div class="row">
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
+              
+                <mat-checkbox formControlName="isActive">Is Active</mat-checkbox>
+ 
+            </div>
+          </div>
 
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>State</mat-label>
-        <mat-select>
-          <mat-option>None</mat-option>
-          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-content>
-</mat-card>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="3" [stepControl]="formArray.get([3])" label="Settings">
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="ownLabels">Point Own Labels</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="ownPaperWork">Attach Own Paper Work</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="warehouseTab">Allow Warehouse Tab</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="serviceLevel">Service Level</mat-checkbox>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="delPoint">Delivery Point</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="unpacked">Unpacked Items</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="packageAway">Take Packaging Away</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="assemble">Assemble</mat-checkbox>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="disassemeble">Disassemeble</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="collectDisposal">Collect Disposal</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="disclaimer">Pod Disclaimer</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="logoUrl">Pod Logo Url</mat-checkbox>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="invoiceForced">Invoice Forced</mat-checkbox>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-sm-6 col-md-3">
+              <mat-checkbox formControlName="podInvoice">Pod with Invoice</mat-checkbox>
+            </div>
+          </div>
+          <mat-form-field>
+            <mat-label>Logo Path</mat-label>
+            <input matInput formControlName="logoPath" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button type="submit" [disabled]="!formGroup.valid">Submit</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
 
-<br>
-<p>Date Picker</p>
-<hr>
-
-<mat-card>
-    <mat-card-content>
-  <mat-form-field appearance="fill" class="w-100">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <br>
-
-  <br>
-
-  <mat-form-field appearance="fill" class="w-100">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-
-  <br>
-
-  <br>
-
-
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <br>
-
-  <br>
-
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</mat-card-content>
-</mat-card>
-
-
-
-<br>
-<p>Checkboxes & Radios</p>
-<hr>
-
-<mat-card>
-    <mat-card-content>
-    <div class="d-flex align-items-center gap-5 flex-wrap">
-        <div>
-            <mat-checkbox class="example-margin">Check me!</mat-checkbox>
-        </div>
-        <div>
-            <mat-checkbox class="example-margin" color="primary">Primary</mat-checkbox>
-        </div>
-        <div>
-            <mat-checkbox class="example-margin" color="warn">Warn</mat-checkbox>
-        </div>
-        <div>
-            <mat-checkbox class="example-margin">Check me!</mat-checkbox>
-        </div>
-        <div>
-            <mat-checkbox class="example-margin">Check me!</mat-checkbox>
-        </div>
-    </div>
-</mat-card-content>
-</mat-card>
-
-<br>
-
-<mat-card>
-    <mat-card-content>
-     <mat-radio-group aria-label="Select an option" class="gap-4 d-flex">
-        <mat-radio-button value="1">Option 1</mat-radio-button>
-        <mat-radio-button value="2">Option 2</mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content>
-</mat-card>
-
-<br>
-
-<mat-card>
-    <mat-card-content>
-    <div class="d-flex align-items-center gap-4 flex-wrap">
-        <mat-slide-toggle>Slide me!</mat-slide-toggle>
-        <mat-slide-toggle color="primary">Primary</mat-slide-toggle>
-        <mat-slide-toggle color="warn">Warn</mat-slide-toggle>
-    </div>
-</mat-card-content>
+  </mat-card-content>
 </mat-card>

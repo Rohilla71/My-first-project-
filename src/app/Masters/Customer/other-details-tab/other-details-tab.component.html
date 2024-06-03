@@ -1,0 +1,123 @@
+<mat-card class="mat-card-margin">
+    <mat-card-content>
+        <fieldset class="fieldset-class">
+            <legend>Other Details</legend>
+        <form class="form-margin" [formGroup]="form">
+            <div class="row g-3">
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Display Name</mat-label>
+                        <input matInput formControlName="name">
+                       
+                    </mat-form-field>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Currency</mat-label>
+                        <mat-select formControlName="currency" required>
+                          @for (curr of currencyArray; track curr) {
+                          <mat-option [value]="curr.id">{{curr.name}}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+               </div>
+        
+               <div class="row g-3">
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tax Treatment</mat-label>
+                        <mat-select formControlName="taxPreference" required>
+                          @for (tax of taxTreatmentArray; track tax) {
+                          <mat-option [value]="tax.id">{{tax.name}}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+        
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>PAN</mat-label>
+                        <input matInput formControlName="pan">
+                       
+                    </mat-form-field>
+                </div>
+        
+                
+               </div>
+        
+               <div class="row g-3">
+                
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Account Number</mat-label>
+                        <input matInput type="number" formControlName="accNo">
+                    </mat-form-field>
+        
+                </div>
+        
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Account Reference</mat-label>
+                        <input matInput formControlName="accRef">
+                    </mat-form-field>
+        
+                </div>
+               </div>
+        
+               <div class="row g-3">
+                
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tax Preference</mat-label>
+                        <mat-select formControlName="taxPreference" required>
+                          @for (tax of taxPreferenceArray; track tax) {
+                          <mat-option [value]="tax.id">{{tax.name}}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+        
+                <div class="col-6 col-md-6 col-lg-6">
+                        
+                        <div class="file-upload">
+                        <input type="file" class="file-upload" [accept]="reqfiletype"
+                         (onchange)="fileUpload($event)">
+                        </div>
+                </div>
+        
+               </div>
+        
+               <div class="row g-3">
+                
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Terms Conditions</mat-label>
+                        <input matInput formControlName="termsCondn">
+                       
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-6 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Disclaimer</mat-label>
+                        <input matInput formControlName="disclaimer">
+                       
+                    </mat-form-field>
+                </div>
+               </div>
+            
+               <div class="row g-3 btn-class">
+                <div class="col-12 col-md-12 ">
+                    <div class="d-flex gap-3 btn-class">
+                        <button [disabled]="!form.valid"
+                        mat-flat-button color="success" class="px-4" type="button"
+                            (click)="SubmitForm()">Submit</button>
+                    </div>
+                </div>
+               </div>
+        </form>
+        </fieldset>
+    </mat-card-content>
+  </mat-card>
+

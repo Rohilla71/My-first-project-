@@ -1,14 +1,36 @@
 <aside class="sidebar-wrapper mat-elevation-z9" [ngClass]="{'mini-sidebar' : getSideBarSate()}">
   <div class="sidebar-header">
-      <img src="assets/images/app/Screenshot.png" width="100">
+      <img src="assets/images/app/Screenshot.png" width="100" routerLink="/dashboard/analytics">
       <!-- <div class="logo-name">Matzon Admin</div> -->
   </div>
   <nav class="sidebar-menu">
 
     <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel [class.mat-elevation-z0]="true">
+
+      @for (item of sideMenuList; track item) {
+        <!-- @if(item.isActive) { -->
+          <mat-expansion-panel [class.mat-elevation-z0]="true">
+            <mat-expansion-panel-header>
+              <mat-icon class="material-icons-outlined">{{item.iconClass}}</mat-icon>{{item.name}}
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+            @for ( submenu of item.submenuDetails; track submenu) {
+              <!-- @if(submenu.isActive) { -->
+              
+                <a mat-list-item routerLink="{{submenu.navigateUrl}}"><mat-icon>{{submenu.iconClass}}</mat-icon>{{submenu.name}}</a>
+              <!-- } -->
+             
+            }
+          </mat-nav-list>
+  
+          </mat-expansion-panel>
+        <!-- } -->
+
+      }
+
+        <!-- <mat-expansion-panel [class.mat-elevation-z0]="true">
           <mat-expansion-panel-header>
-            <mat-icon class="material-icons-outlined">dashboard</mat-icon>Dashboard
+            <mat-icon class="material-icons-outlined">settings</mat-icon>Dashboard
           </mat-expansion-panel-header>
           <mat-nav-list>
             <a mat-list-item routerLink="dashboard/e-commerce"><mat-icon>arrow_right</mat-icon>eCommerce</a>
@@ -113,7 +135,7 @@
         
         <mat-nav-list>
           <a mat-list-item href="https://codervent.com/matzon/doc/" target="_blank"><mat-icon class="material-icons-outlined">description</mat-icon>Documentation</a>
-        </mat-nav-list>
+        </mat-nav-list> -->
       
       </mat-accordion>
     

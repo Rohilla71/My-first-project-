@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from 'src/app/core/auth.guard';
 
 //Route for content layout with sidebar, navbar and footer.
 
@@ -49,6 +50,11 @@ export const Full_ROUTES: Routes = [
     {
         path: 'downloads',
         loadChildren: () => import('../../downloads/downloads.module').then(m => m.DownloadsModule)
-    }
+    },
+    {
+        path: 'masters',
+        loadChildren: () => import('../../Masters/master.module').then(m => m.MasterModule)
+    },
+
     
 ];
