@@ -14,14 +14,22 @@ import { CityCreateComponent } from './City/city-create/city-create.component';
 import { CityListComponent } from './City/city-list/city-list.component';
 import { DeliveryStatusListComponent } from './Delivery Status/delivery-status-list/delivery-status-list.component';
 import { DeliveryStatusCreateComponent } from './Delivery Status/delivery-status-create/delivery-status-create.component';
-import { CreateCustomerComponent } from './Customer/create-customer/create-customer.component';
-import { CreateCustomerService } from './Customer/create-customer.service';
-import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
-import { LandingPageComponent } from './Customer/landing-page/landing-page.component';
-import { OtherDetailsTabComponent } from './Customer/other-details-tab/other-details-tab.component';
-import { ClientDocumentComponent } from './Customer/client-document/client-document.component';
-import { DocumentsUploadComponent } from './Customer/documents-upload/documents-upload.component';
-
+import { PostalCodeListComponent } from './Postal Code/postal-code-list/postal-code-list.component';
+import { PostalCodeCreateComponent } from './Postal Code/postal-code-create/postal-code-create.component';
+import { DeliveryTypeListComponent } from './DeliveryType/delivery-type-list/delivery-type-list.component';
+import { DeliveryTypeCreateComponent } from './DeliveryType/delivery-type-create/delivery-type-create.component';
+import { InvoiceTermListComponent } from './InvoiceTerm/invoice-term-list/invoice-term-list.component';
+import { InvoiceTermCreateComponent } from './InvoiceTerm/invoice-term-create/invoice-term-create.component';
+import { VehicleSizeListComponent } from './VehicleSize/vehicle-size-list/vehicle-size-list.component';
+import { VehicleSizeCreateComponent } from './VehicleSize/vehicle-size-create/vehicle-size-create.component';
+import { UnitListComponent } from './Unit/unit-list/unit-list.component';
+import { CreateUnitListComponent } from './Unit/create-unit-list/create-unit-list.component';
+import { CurrencyListComponent } from './Currency/currency-list/currency-list.component';
+import { CurrencyCreateComponent } from './Currency/currency-create/currency-create.component';
+import { ClientBasicDetailsComponent } from './Client/client-basic-details/client-basic-details.component';
+import { ClientEditViewInfoComponent } from './Client/client-edit-view-info/client-edit-view-info.component';
+import { ClientOtherDeailsComponent } from './Client/client-other-deails/client-other-deails.component';
+import { ClientDocumentUploadComponent } from './Client/client-document-upload/client-document-upload.component';
 @NgModule({
   declarations: [
     ClientListComponent,
@@ -34,20 +42,30 @@ import { DocumentsUploadComponent } from './Customer/documents-upload/documents-
     CityListComponent,
     DeliveryStatusListComponent,
     DeliveryStatusCreateComponent,
-    CreateCustomerComponent,
-    CustomerListComponent,
-    LandingPageComponent,
-    OtherDetailsTabComponent,
-    ClientDocumentComponent,
-    DocumentsUploadComponent
+    PostalCodeListComponent,
+    PostalCodeCreateComponent,
+    DeliveryTypeListComponent,
+    DeliveryTypeCreateComponent,
+    InvoiceTermListComponent,
+    InvoiceTermCreateComponent,
+    VehicleSizeListComponent,
+    VehicleSizeCreateComponent,
+    UnitListComponent,
+    CreateUnitListComponent,
+    CurrencyCreateComponent,
+    CurrencyListComponent,
+    ClientBasicDetailsComponent,
+    ClientEditViewInfoComponent,
+    ClientOtherDeailsComponent,
+    ClientDocumentUploadComponent
   ],
   imports: [
     CommonModule,
     MastersRoutingModule,
     ReactiveFormsModule,
     FormsRoutingModule,
-    MatModule
-  ],
-  providers: [CreateCustomerService]
+    MatModule,
+
+  ]
 })
 export class MasterModule {}

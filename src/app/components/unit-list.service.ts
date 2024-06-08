@@ -51,7 +51,7 @@ export class UnitListService {
   }
 
   CreateCity(form: any) {
-    debugger
+    
     // var UserId = 1
     var UserId = localStorage.getItem('userId');
     let data = {

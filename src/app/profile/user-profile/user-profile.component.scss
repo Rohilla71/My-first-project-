@@ -1,0 +1,21 @@
+.photoIcon {
+  position: absolute;
+  left: 43%;
+  top: 78%;
+}
+
+.hoverable:hover {
+  filter: brightness(80%);
+
+  .photoIcon {
+    left: 43%;
+    top: -88%;
+  }
+  .rounded-circle {
+    cursor: grab !important;
+  }
+}
+
+.photoIcon:hover {
+  cursor: grab !important;
+}

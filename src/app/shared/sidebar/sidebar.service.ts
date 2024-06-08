@@ -23,7 +23,7 @@ export class SidebarService {
   }
 
   getMenuList() {
-    // return this.http.get<SideMenuResponse>("http://122.176.139.224:84/api/Master/GetMenuMasterList");
-    return this.http.get<SideMenuResponse>("./assets/JSON/sidemenu.json");
+    return this.http.get<SideMenuResponse>("http://122.176.139.224:84/api/Master/GetMenuMasterList");
+    //return this.http.get<SideMenuResponse>("./assets/JSON/sidemenu.json");
   }
 }

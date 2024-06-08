@@ -20,18 +20,27 @@
                 <input matInput formControlName="name" required>
               </mat-form-field>
             </div>
-            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
-              <!-- <mat-form-field appearance="outline">
-                <mat-label>Country</mat-label>
-                <input matInput formControlName="countryId" required>
-              </mat-form-field> -->
-              <mat-form-field appearance="outline"  >
+            <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4" >
+              <!-- <mat-form-field appearance="outline"  >
                 <mat-label>Country</mat-label>
                 <mat-select formControlName="countryId" name="countryId">
                   <mat-option>None</mat-option>
                   <mat-option *ngFor="let item of countryService.countries" [value]="item.id">{{item.name}}</mat-option>
                 </mat-select>
-              </mat-form-field>
+              </mat-form-field> -->
+              <mat-form-field appearance="outline" >
+                <mat-label>Country</mat-label>
+                <input matInput aria-label="Country" [matAutocomplete]="auto"
+                    [formControl]="countryCtrl" required />
+                    
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let item of filteredCountry | async"
+                        [value]="item.name">
+                        <span>{{ item.name }} </span>
+                    </mat-option>
+                </mat-autocomplete>
+                <!-- <mat-icon matSuffix>language</mat-icon> -->
+            </mat-form-field>
             </div>
             <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
               <mat-form-field appearance="outline">
@@ -106,15 +115,15 @@
 
           <div class="row">
             <div class="col-lg-4 col-xl-4 col-sm-6 col-md-4">
-              
                 <mat-slide-toggle formControlName="isActive">Is Active</mat-slide-toggle>
- 
             </div>
           </div>
 
+          <br/>
+          
           <div>
-            
-            <button mat-button matStepperNext type="button">Next</button>
+            <button mat-stroked-button color="primary" matStepperNext type="button">Next</button>
+            <!-- <button mat-flat-button color="primary" matStepperNext type="button">Next</button> -->
           </div>
         </mat-step>
         <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Delivery Details">
@@ -179,8 +188,8 @@
             </div>
           </div>
           <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
+            <button mat-stroked-button color="primary" matStepperPrevious type="button" style="margin-right:5px">Back</button>
+            <button mat-stroked-button color="primary" matStepperNext type="button">Next</button>
           </div>
         </mat-step>
 
@@ -230,8 +239,8 @@
             <input matInput formControlName="email">
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
+            <button mat-stroked-button color="primary" matStepperPrevious type="button" style="margin-right:5px">Back</button>
+            <button mat-stroked-button color="primary" matStepperNext type="button">Next</button>
           </div>
         </mat-step>
 
@@ -292,9 +301,9 @@
             <input matInput formControlName="logoPath" required>
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-            <button mat-button type="submit" [disabled]="!formGroup.valid">Submit</button>
+            <button mat-stroked-button matStepperPrevious type="button" style="margin-right:5px">Back</button>
+            <button mat-stroked-button color="primary" type="button"(click)="stepper.reset()" style="margin-right:5px">Reset</button>
+            <button mat-flat-button type="submit" [disabled]="!formGroup.valid">Submit</button>
           </div>
         </mat-step>
       </mat-stepper>

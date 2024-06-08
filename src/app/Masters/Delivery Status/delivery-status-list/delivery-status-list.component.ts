@@ -1,99 +1,93 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DeliveryStatusCreateComponent } from '../delivery-status-create/delivery-status-create.component';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeliveryStatusService } from '../delivery-status.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DeliveryStatusCreateComponent } from '../delivery-status-create/delivery-status-create.component';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
-export interface CountryData {
+export interface DeliveryStatusData {
   id: number;
   name: string;
-  code: string;
-  callingCode: string;
-  currencyId: number;
-  isActive: boolean;
-  capital: string;
-  latitude: string;
-  longitude: string;
-  timeZone: string;
-  flagEmoji: string;
-  nationality: string;
-  createdBy: number;
-  updatedBy: number;
+  description: string;
+  sequence: string;
+  isActive: number;
+  lastActionBy: boolean;
+  lastActionOn: string;
 }
-
 
 @Component({
   selector: 'app-delivery-status-list',
   templateUrl: './delivery-status-list.component.html',
-  styleUrls: ['./delivery-status-list.component.scss']
+  styleUrls: ['./delivery-status-list.component.scss'],
 })
-export class DeliveryStatusListComponent {
-
-  displayedColumns: string[] = [ 'id', 'name', 'code', 'callingCode', 'capital', 'nationality',   'latitude', 'longitude', 'lastActionBy', 'lastActionOn', 'isActive', 'actions'];
+export class DeliveryStatusListComponent implements OnInit {
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'description',
+    'sequence',
+    'lastActionBy',
+    'lastActionOn',
+    'isActive',
+    'actions',
+  ];
 
   isLoading = true;
-  dataSource: MatTableDataSource<CountryData>;
-  // countries: CountryData[] = [];
+  dataSource: MatTableDataSource<DeliveryStatusData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public deliveryService: DeliveryStatusService,
+  constructor(
+    public deliveryStatusService: DeliveryStatusService,
     public dialog: MatDialog,
-    //private toastr: ToastrService
-  ) {
-    debugger
+    public snackBarService : SnackBarService
+  ) {}
+
+  ngOnInit(): void {
     this.GetDelieveryStatusList();
   }
 
-
-  //region
-
   add(): void {
-    debugger
-    
     const dialogRef = this.dialog.open(DeliveryStatusCreateComponent, {
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      //this.GetCountryList();
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result) => {
+      this.GetDelieveryStatusList();
     });
   }
 
   edit(country: any): void {
-    debugger
     const dialogRef = this.dialog.open(DeliveryStatusCreateComponent, {
       width: '800px',
       data: { country },
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      //this.GetCountryList();
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result) => {
+      this.GetDelieveryStatusList();
     });
   }
 
-
   GetDelieveryStatusList() {
-    debugger
-    this.deliveryService.GetDelieveryStatusList().subscribe(p => {
-      debugger
+    this.deliveryStatusService.GetDelieveryStatusList().subscribe((p) => {
       if (p.success == true) {
         this.isLoading = false;
-        this.deliveryService.DelieveryStatusList = p?.data;
-        this.bindTable(this.deliveryService.DelieveryStatusList);
+        this.deliveryStatusService.DeliveryStatusList = p?.data;
+        this.dataSource = new MatTableDataSource(
+          this.deliveryStatusService.DeliveryStatusList
+        );
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.bindTable(this.deliveryStatusService.DeliveryStatusList);
       }
     }),
-      error => {
-        debugger;
+      (error) => {
+        this.snackBarService.openSnackbar(error.message, "error");
         this.isLoading = false;
-        console.log(error);
-      }
-
+      };
   }
 
   bindTable(data: any) {
@@ -102,11 +96,11 @@ export class DeliveryStatusListComponent {
     this.dataSource.sort = this.sort;
   }
 
-  //endregion
-
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.dataSource !== undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   applyFilter(event: Event) {

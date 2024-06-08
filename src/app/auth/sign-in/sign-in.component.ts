@@ -42,7 +42,6 @@ export class SignInComponent implements OnInit {
         complete: () => {  }, 
         error: (error) => {  
           this.showSnackbarTopPosition('Invalid email or password !!!','Error','2000') 
-          console.log(error)
         },   
         next: () => {  this.router.navigate(['']) },     // nextHandler
     });

@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="col-12 col-xl-12">
+        <br />
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-11">
+                        <h5 class="mb-3">Postal Code Form</h5>
+                    </div>
+                    <div class="col-1 close-button">
+                        <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                    </div>
+                </div>
+                <form [formGroup]="form">
+                    <div class="row g-3">
+
+                        <div class="col-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-group">
+                                <ng-select [items]="countryList" bindLabel="name"
+                                    bindValue="id" labelForId="country" [multiple]="false"
+                                    [searchable]="true" clearAllText="Clear" formControlName="countryId"
+                                    placeholder="Country" (change)="onCountryChange($event)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-group">
+                                <ng-select [items]="stateList" bindLabel="name" bindValue="id" 
+                                    [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="stateId" placeholder="Select State"
+                                    (change)="onStateChange($event)">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-group">
+                                <ng-select [items]="cityList" bindLabel="name" bindValue="id"
+                                    [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="cityId" placeholder="Select City"
+                                    (change)="onCityChange($event)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-group">
+                                <ng-select [items]="postCodeList" bindLabel="postalCode" bindValue="id"
+                                    [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="postalCode" placeholder="Select PostalCode"  (change)="onPostalCodeChange($event)"
+                                >
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Latitude</mat-label>
+                                <input matInput formControlName="latitude" />
+                                <mat-icon matSuffix>edit_location</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Longitude</mat-label>
+                                <input matInput formControlName="longitude" />
+                                <mat-icon matSuffix>edit_location</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Tax Rate</mat-label>
+                                <input matInput formControlName="taxRate" />
+                                <mat-icon matSuffix>attach_money</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <input matInput formControlName="description" />
+                                <mat-icon matSuffix> sms</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <section class="example-section">
+                                <mat-slide-toggle formControlName="isTaxApplicable"
+                                    (change)="isTaxApplicableChange($event)" class="example-margin" [color]="color"
+                                    [checked]="checked" [disabled]="disabled" labelPosition="before">
+                                    Is Tax Applicable :
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <section class="example-section">
+                                <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
+                                    class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                                    labelPosition="before">
+                                    IsActive :
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+                        <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                            <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                                Submit
+                            </button>
+                            <button mat-stroked-button class="px-4" (click)="Reset()">
+                                Reset
+                            </button>
+                        </mat-dialog-actions>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

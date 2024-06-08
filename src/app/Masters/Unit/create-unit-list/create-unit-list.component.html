@@ -1,0 +1,51 @@
+<!-- <div class="row g-4"> -->
+<div class="container">
+    <div class="col-12 col-xl-12">
+        <div class="row">
+            <div class="col-11">
+                <h5 class="mb-3"> {{ title }}</h5>
+            </div>
+            <div class="col-1">
+                <!-- <button mat-flat-button color="warn" class="px-2" type="button"(click)="close()"> <mat-icon matSuffix>close</mat-icon></button> -->
+                <mat-icon matSuffix type="button" class="cursor-pointer" (click)="close()">cancel</mat-icon>
+            </div>
+        </div>
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name">
+                        <mat-icon matSuffix>account_circle</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-12 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <input matInput formControlName="description">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-12 col-lg-6">
+                    <section class="example-section">
+                        <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
+                            class="example-margin" [color]="color" [checked]="checked" labelPosition="before">
+                            IsActive :
+                        </mat-slide-toggle>
+                    </section>
+                </div>
+                <div class="col-12 col-md-12">
+                    <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                        <button mat-flat-button  class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                            Submit
+                        </button>
+                        <button mat-stroked-button class="px-4" (click)="Reset()">
+                            Reset
+                        </button>
+                    </mat-dialog-actions>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- </div> -->

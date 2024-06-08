@@ -34,9 +34,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgxEditorModule } from 'ngx-editor';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const material = [
   NgChartsModule,
@@ -73,22 +75,18 @@ const material = [
   MatSortModule,
   FormsModule,
   ReactiveFormsModule,
-  MatProgressSpinnerModule
-]
+  MatProgressSpinnerModule,
+  MatAutocompleteModule,
+  NgxEditorModule,
+];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     material,
-    ToastrModule.forRoot({
-      timeOut: 2000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-    }),
+    NgSelectModule
   ],
-  exports: [
-    material
-  ]
+  exports: [material, NgSelectModule],
 })
-export class MatModule { }
+export class MatModule {}

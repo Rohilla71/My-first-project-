@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import { Validators, AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 import { CountryService } from '../../Country/country.service';
+import { ThemePalette } from '@angular/material/core';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-client-create',
@@ -9,11 +11,38 @@ import { CountryService } from '../../Country/country.service';
   styleUrl: './client-create.component.scss'
 })
 export class ClientCreateComponent implements OnInit {
-
+  color: ThemePalette = 'primary';
+  checked = false;
+  disabled = false;
+  filteredCountry: Observable<unknown>;
+  countryCtrl: FormControl<any>;
+  
   constructor(private _formBuilder: FormBuilder,
     public countryService: CountryService
   ) {
     this.GetCountryList();
+    this.countryCtrl = new FormControl();
+    
+    this.filteredCountry = this.countryCtrl.valueChanges.pipe(
+      startWith(''),
+      map((item) =>
+        item ? this.filterCountry(item) : this.countryService.countries.slice()
+      )
+    );
+  }
+
+  filterCountry(name: any) {
+    
+    let arr = this.countryService.countries.filter(
+      (item) => item.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+
+    if (arr.length == 1) {
+      const getformconrol3: any = this.formArray.get([2])
+      getformconrol3.controls['countryId'].setValue(arr[0].id);
+      // this.formGroup.controls['countryId'].setValue(arr[0].id);
+    }
+    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
   }
 
 
@@ -322,15 +351,15 @@ export class ClientCreateComponent implements OnInit {
 
 
   GetCountryList() {
-    debugger
+    
     this.countryService.GetCountryList().subscribe(p => {
-      debugger
+      
       if (p.success == true) {
         this.countryService.countries = p?.data;
       }
     }),
       error => {
-        debugger;
+        ;
         console.log(error);
       }
 

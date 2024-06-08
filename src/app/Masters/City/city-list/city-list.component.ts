@@ -1,12 +1,23 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
 import { CityService } from '../city.service';
 import { CityCreateComponent } from '../city-create/city-create.component';
+import { FormControl } from '@angular/forms';
+import {
+  catchError,
+  map,
+  merge,
+  Observable,
+  of as observableOf,
+  pipe,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 export interface CityData {
   id: number;
@@ -22,144 +33,119 @@ export interface CityData {
 @Component({
   selector: 'app-city-list',
   templateUrl: './city-list.component.html',
-  styleUrl: './city-list.component.scss'
+  styleUrl: './city-list.component.scss',
 })
-export class CityListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'stateId', 'isActive', 'latitude', 'longitude', 'lastActionBy', 'lastActionOn', 'actions'];
+export class CityListComponent implements OnInit {
+  ngOnInit(): void { }
 
-  isLoading = true;
-  dataSource: MatTableDataSource<CityData>;
-  cities: CityData[] = [];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'stateId',
+    'isActive',
+    'latitude',
+    'longitude',
+    'lastActionBy',
+    'lastActionOn',
+    'actions',
+  ];
+
+  data: GithubIssue[] = [];
+  dataSource: MatTableDataSource<any>;
+  pageSizes = [10, 30, 50];
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public service: CityService,
+  constructor(public service: CityService, 
     public dialog: MatDialog,
-    private toastr: ToastrService
-  ) {
-    debugger
-    this.GetCityList();
-  }
-
-
-  //region
+    public snackBarService : SnackBarService
+  ) { }
 
   add(): void {
-    debugger
-
     const dialogRef = this.dialog.open(CityCreateComponent, {
       width: '800px',
-      disableClose: true
-      //  /data: {name: this.name, animal: this.animal}
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.GetCityList();
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result) => {
+      this.dataBinding();
     });
   }
 
   edit(city: any): void {
-    debugger
     const dialogRef = this.dialog.open(CityCreateComponent, {
-      // width: '800px',
       data: { city },
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.GetCityList();
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result) => {
+      this.dataBinding();
     });
   }
 
   delete(id: any): void {
-    debugger
-
-    this.service.DeleteCity(id).subscribe(p => {
-      debugger
+    this.service.DeleteCity(id).subscribe((p) => {
       if (p) {
+        this.snackBarService.openSnackbar("city deleted", "success");
         this.service.cities = p;
-        this.bindTable(this.service.cities);
+        //this.bindTable(this.service.cities);
       }
     }),
-      error => {
-        debugger;
-        console.log(error);
-      }
-    // const dialogRef = this.dialog.open(AddCityComponent, {
-    //   width: '800px',
-    //   data: { id },
-    //   disableClose: true
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.GetCountryList();
-    //   console.log('The dialog was closed');
-    // });
-  }
-  tempCity = [
-    {
-      "id": 140413,
-      "name": "'Ali Sabieh",
-      "stateId": 1537,
-      "isActive": true,
-      "latitude": "11.15583",
-      "longitude": "42.7125",
-      "createdBy": 1,
-      "updatedBy": null
-    },
-    {
-      "id": 214152,
-      "name": "'s-Graveland",
-      "stateId": 3324,
-      "isActive": true,
-      "latitude": "52.2442",
-      "longitude": "5.1211",
-      "createdBy": 1,
-      "updatedBy": null
-    },
-    {
-      "id": 265151,
-      "name": "demo26",
-      "stateId": 1,
-      "isActive": true,
-      "latitude": "12",
-      "longitude": "1234",
-      "createdBy": 1,
-      "updatedBy": null
-  }];
-
-  GetCityList() {
-    debugger
-    // this.bindTable(this.tempCity);
-    this.service.GetCityList().subscribe(p => {
-      debugger
-      if (p.success == true) {
-        this.isLoading = false;
-        this.service.cities = p?.data;
-        this.bindTable(this.service.cities);
-      }
-    }),
-      error => {
-        debugger;
-        this.isLoading = false;
-        console.log(error);
-      }
-
+      (error) => {
+        this.snackBarService.openSnackbar(error.message, "error");
+      };
   }
 
-  bindTable(data: any) {
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  //endregion
+  searchKeywordFilter = new FormControl();
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataBinding();
+  }
+
+  dataBinding() {
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(
+      this.searchKeywordFilter.valueChanges,
+      this.sort.sortChange,
+      this.paginator.page
+    )
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          var filterValue =
+            this.searchKeywordFilter.value == null
+              ? ''
+              : this.searchKeywordFilter.value;
+          return this.service
+            .getCities(
+              this.sort.active,
+              this.sort.direction,
+              filterValue,
+              this.paginator.pageIndex + 1,
+              this.paginator.pageSize
+            )
+            .pipe(catchError(() => 
+              observableOf(null)));
+        }),
+        map((data) => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = data === null;
+
+          if (data === null) {
+            return [];
+          }
+          this.resultsLength = data.data.totalRecords;
+          return data.data.data;
+        })
+      )
+      .subscribe((data) => (this.dataSource = data));
   }
 
   applyFilter(event: Event) {
@@ -170,4 +156,17 @@ export class CityListComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+}
+
+
+export interface GithubApi {
+  items: GithubIssue[];
+  total_count: number;
+}
+
+export interface GithubIssue {
+  created_at: string;
+  number: string;
+  state: string;
+  title: string;
 }

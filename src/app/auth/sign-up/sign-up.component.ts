@@ -35,7 +35,6 @@ export class SignUpComponent implements OnInit {
       complete: () => {  }, 
       error: (error) => {  
         
-        console.log(error)
         this.showSnackbarTopPosition(error.error,'Error','2000') 
       },   
       next: () => {  
@@ -43,7 +42,6 @@ export class SignUpComponent implements OnInit {
        },     // nextHandler
   });
   // .subscribe(res=>{
-  //       console.log(res)
   //   })
   }
 

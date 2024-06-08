@@ -10,7 +10,7 @@
   </div>
 
   <div class="d-flex align-items-center gap-1">
-    <button mat-icon-button [matMenuTriggerFor]="language" class="d-none d-sm-flex">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="language" class="d-none d-sm-flex">
       <img src="assets/images/county/02.png" alt="">
     </button>
     <mat-menu #language class="rounded-4">
@@ -62,11 +62,11 @@
           <span>Hindi</span>
         </div>
       </button>
-    </mat-menu>
+    </mat-menu> -->
     <button mat-icon-button (click)="darkMode()">
       <mat-icon class="material-icons-outlined">{{ theme_name }}</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="Appmenu">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="Appmenu">
       <mat-icon class="material-icons-outlined">apps</mat-icon>
     </button>
     <mat-menu #Appmenu class="dropdown-apps rounded-4">
@@ -82,9 +82,9 @@
           </div>
         </mat-grid-tile>
       </mat-grid-list>
-    </mat-menu>
+    </mat-menu> -->
 
-    <button mat-icon-button [matMenuTriggerFor]="Notification">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="Notification">
       <mat-icon class="material-icons-outlined" matBadge="7" matBadgePosition="after"
         matBadgeColor="warn">notifications</mat-icon>
     </button>
@@ -116,27 +116,28 @@
       <div class="mx-3 my-2">
         <button mat-raised-button color="primary" class="rounded-4 w-100">View All</button>
       </div>
-    </mat-menu>
+    </mat-menu> -->
 
     <button mat-icon-button [matMenuTriggerFor]="UserProfile">
-      <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+      <!-- <mat-icon class="material-icons-outlined">account_circle</mat-icon> -->
+      <img src="{{baseUrl+userImage}}" class="rounded-circle" alt="">
     </button>
     <mat-menu #UserProfile class="rounded-4 dropdown-userprofile">
-      <button mat-menu-item class="d-flex align-items-center justify-content-center text-center py-2">
+      <button mat-menu-item routerLink="/profile/user-profile" class="d-flex align-items-center justify-content-center text-center py-2">
         <div>
-          <img src="assets/images/avatars/avatar-1.png" width="80" height="80" class="rounded-circle" alt="">
+          <img src="{{baseUrl+userImage}}" width="80" height="80" class="rounded-circle" alt="">
         </div>
         <div>
-          <h4 class="username mb-0">Hi, codervent!</h4>
-          <p class="mb-0">coderventxyz.com</p>
+          <h4 class="username mb-0">{{userDataList?.displayName}}</h4>
+          <p class="mb-0">{{userDataList?.email}}</p>
         </div>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/profile/user-profile">
         <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-        <span>Profile</span>
+        <span >Profile</span>
       </button>
-      <button mat-menu-item>
+      <!-- <button mat-menu-item>
         <mat-icon class="material-icons-outlined">settings</mat-icon>
         <span>Setting</span>
       </button>
@@ -151,7 +152,7 @@
       <button mat-menu-item>
         <mat-icon class="material-icons-outlined">file_download</mat-icon>
         <span>Downloads</span>
-      </button>
+      </button> -->
       <mat-divider></mat-divider>
 
       <button mat-menu-item (click)="logout()">

@@ -7,14 +7,14 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Display Name</mat-label>
-                        <input matInput formControlName="name">
+                        <input matInput formControlName="displayName">
                        
                     </mat-form-field>
                 </div>
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Currency</mat-label>
-                        <mat-select formControlName="currency" required>
+                        <mat-select formControlName="currencyId" required>
                           @for (curr of currencyArray; track curr) {
                           <mat-option [value]="curr.id">{{curr.name}}</mat-option>
                           }
@@ -27,7 +27,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Tax Treatment</mat-label>
-                        <mat-select formControlName="taxPreference" required>
+                        <mat-select formControlName="taxTreatmentId" required>
                           @for (tax of taxTreatmentArray; track tax) {
                           <mat-option [value]="tax.id">{{tax.name}}</mat-option>
                           }
@@ -38,7 +38,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>PAN</mat-label>
-                        <input matInput formControlName="pan">
+                        <input matInput formControlName="panno">
                        
                     </mat-form-field>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Account Number</mat-label>
-                        <input matInput type="number" formControlName="accNo">
+                        <input matInput type="number" formControlName="accountNo">
                     </mat-form-field>
         
                 </div>
@@ -59,7 +59,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Account Reference</mat-label>
-                        <input matInput formControlName="accRef">
+                        <input matInput formControlName="accountReference">
                     </mat-form-field>
         
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Tax Preference</mat-label>
-                        <mat-select formControlName="taxPreference" required>
+                        <mat-select formControlName="taxPreferenceId" required>
                           @for (tax of taxPreferenceArray; track tax) {
                           <mat-option [value]="tax.id">{{tax.name}}</mat-option>
                           }
@@ -93,7 +93,7 @@
                 <div class="col-6 col-md-6 col-lg-6">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Terms Conditions</mat-label>
-                        <input matInput formControlName="termsCondn">
+                        <input matInput formControlName="termsConditions">
                        
                     </mat-form-field>
                 </div>

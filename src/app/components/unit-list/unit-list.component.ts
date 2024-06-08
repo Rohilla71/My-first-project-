@@ -66,14 +66,14 @@ this.getUnitList()
 
   delete(id: any): void {
     // this.service.DeleteCity(id).subscribe(p => {
-    //   debugger
+    //   
     //   if (p) {
     //     this.service.cities = p;
     //     this.bindTable(this.service.cities);
     //   }
     // }),
     //   error => {
-    //     debugger;
+    //     ;
     //     console.log(error);
     //   }
     // const dialogRef = this.dialog.open(AddCityComponent, {

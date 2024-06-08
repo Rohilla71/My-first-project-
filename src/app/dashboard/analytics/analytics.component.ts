@@ -22,6 +22,8 @@ import {
 }
 
   from "ng-apexcharts";
+import { FormGroup, FormControl } from '@angular/forms';
+import { Editor, Validators } from 'ngx-editor';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -249,7 +251,7 @@ export class AnalyticsComponent implements OnInit {
         type: "gradient",
         gradient: {
           shade: "dark",
-          gradientToColors: ["#00a294"],
+          gradientToColors: ["#57b85c"],
           shadeIntensity: 1,
           type: "vertical",
           opacityFrom: 1,
@@ -257,7 +259,7 @@ export class AnalyticsComponent implements OnInit {
           stops: [0, 100, 100, 100]
         }
       },
-      colors: ["#00a294"],
+      colors: ["#57b85c"],
       plotOptions: {
         bar: {
           horizontal: false,
@@ -697,7 +699,19 @@ export class AnalyticsComponent implements OnInit {
 
   }
 
+
+  editor: Editor;
+
+  form = new FormGroup({
+    editorContent: new FormControl(
+      { value: 'Hello Moto', disabled: false },
+      Validators.required()
+    ),
+  });
+
+
   ngOnInit(): void {
+    this.editor = new Editor();
     // $.getScript('./assets/js/analytics-dashboard.js');
   }
 

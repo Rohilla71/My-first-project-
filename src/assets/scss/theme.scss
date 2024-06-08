@@ -2,23 +2,54 @@
 
 @include mat.core();
 
+$bright-navy-blue-palette: (
+  50: #e3f2fd,
+  100: #badffb,
+  200: #8fcbfa,
+  300: #61b7f7,
+  400: #3ca7f6,
+  500: #0c98f5,
+  600: #078ae7,
+  700: #0078d4,
+  800: #0067c2,
+  900: #0049a3,
+  A100: #c2e4ff,
+  A200: #addcff,
+  A400: #1f9eff,
+  A700: #00518f,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((
  color: (
-   primary: mat.define-palette(mat.$indigo-palette),
-   accent: mat.define-palette(mat.$pink-palette),
+   primary: mat.define-palette(mat.$green-palette,600),
+   accent: mat.define-palette(mat.$green-palette),
  ),
- density: -2
 
 ));
 
 // Define a light theme
 $light-theme: mat.define-light-theme((
  color: (
-   primary: mat.define-palette(mat.$indigo-palette),
-   accent: mat.define-palette(mat.$pink-palette),
+  // primary: mat.define-palette($bright-navy-blue-palette),
+   primary: mat.define-palette(mat.$green-palette,600),
+   accent: mat.define-palette(mat.$green-palette),
  ),
- density: -4
 ));
 
 .dark_mode {

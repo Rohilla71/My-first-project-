@@ -29,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LockScreenComponent, 
     SigninWithHeaderFooterComponent,
     SignupWithHeaderFooterComponent,
+    
    
   ],
   imports: [

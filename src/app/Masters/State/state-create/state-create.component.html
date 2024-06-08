@@ -30,15 +30,19 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                                <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Country</mat-label>
-                                    <mat-select [(ngModel)]="selectedCountry" [formControlName]="'countryId'">
-                                        <ng-container *ngFor="let item of countryList">
-                                            <mat-option [value]="item.id">
-                                                {{item.name}}
-                                            </mat-option>
-                                        </ng-container>
-                                    </mat-select>
+                                    <input matInput aria-label="Country" [(ngModel)]="selectedCountry" [matAutocomplete]="auto"
+                                        [formControl]="countryCtrl" required />
+                                        
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let country of filteredCountry | async"
+                                            [value]="country.name"
+                                            (onclick)="GetStateByCountryId(country.id)">
+                                            <span>{{ country.name }} </span>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-icon matSuffix>language</mat-icon>
                                 </mat-form-field>
                             </div>
                             <div class="col-12 col-md-6">
@@ -82,7 +86,7 @@
                         </div>
                         <div class="col-12 col-md-12">
                             <div class="d-flex gap-3 button-container">
-                                <button mat-flat-button color="success" class="px-4" type="button" (click)="SubmitForm()">
+                                <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
                                     Submit
                                 </button>
                                 <button mat-stroked-button class="px-4" (click)="Reset()">

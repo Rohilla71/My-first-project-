@@ -49,7 +49,6 @@ export class ResetPasswordComponent implements OnInit {
       complete: () => {  }, 
       error: (error) => {  
         this.showSnackbarTopPosition('Some error occured !!!','Error','2000') 
-        console.log(error)
       },   
       next: (resp) => { 
         this.showSnackbarTopPosition('Password updated sucessfully !!!','Error','2000') 
@@ -58,7 +57,6 @@ export class ResetPasswordComponent implements OnInit {
     
     
   //   .subscribe(res=>{
-  //     console.log(res)
   //     this.showSnackbarTopPosition('Some error occured !!!','Error','2000') 
 
   // }) 
@@ -75,10 +73,8 @@ export class ResetPasswordComponent implements OnInit {
   showSnackbarAction(content, action) {
     let snack = this.snackBar.open(content, action);
     snack.afterDismissed().subscribe(() => {
-      console.log("This will be shown after snackbar disappeared");
     });
     snack.onAction().subscribe(() => {
-      console.log("This will be called when snackbar button clicked");
     });
   }
   showSnackbarDuration(content, action, duration) {

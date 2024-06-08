@@ -200,7 +200,6 @@ export class ElementsComponent implements OnInit {
         logoPath: getformconrol4.controls.logoPath.value
       }
     }
-    console.log(formData);
   //  this.stepperDataService.getStepperData(formData).subscribe((data) => {
 
    // })

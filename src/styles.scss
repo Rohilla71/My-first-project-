@@ -1,7 +1,64 @@
-@import 'ngx-toastr/toastr';
+@import "ngx-toastr/toastr";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 // bootstrap style toast
 // or import a bootstrap 4 alert styled design (SASS ONLY)
 // should be after your bootstrap imports, it uses bs4 variables, mixins, functions
 // @import 'ngx-toastr/toastr-bs4-alert';
 
+
+.btn-green {
+  background-color: #57b85c !important;
+  color: white !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 56px !important;
+}
+.ng-select-container {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ng-dropdown-panel {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  color: black;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 15px 16px;
+  cursor: pointer;
+}
+
+.ng-option:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 0px;
+}
+
+.ng-value-container {
+  font-size: 16px;
+  color: #000;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

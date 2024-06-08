@@ -1,16 +1,22 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CityService } from '../city.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { CountryService } from '../../Country/country.service';
+import { Observable, map, startWith } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-city-create',
   templateUrl: './city-create.component.html',
-  styleUrl: './city-create.component.scss'
+  styleUrl: './city-create.component.scss',
 })
 export class CityCreateComponent {
   color: ThemePalette = 'accent';
@@ -23,17 +29,24 @@ export class CityCreateComponent {
   selectedCountry;
   selectedState;
 
+  countryCtrl: FormControl<any>;
+  filteredCountry: Observable<unknown>;
+
+  stateCtrl: FormControl<any>;
+  filteredState: Observable<unknown>;
+
   constructor(
     public dialogRef: MatDialogRef<CityCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     public service: CityService,
     public service2: CountryService,
-    private toastr: ToastrService) {
-    debugger
-    this.CData = data?.city;
-    this.GetCountryList()
+    public snackBarService : SnackBarService
+  ) {
+    
+    this.GetCountryList();
 
+    this.CData = data?.city;
     if (!this.CData) {
       this.form = this.fb.group({
         id: 0,
@@ -46,9 +59,9 @@ export class CityCreateComponent {
         createdBy: [0],
         updatedBy: [0],
       });
-    }
-    else {
-      this.selectedState = this.CData.state.id;
+    } else {
+
+      this.selectedState = this.CData.state.name;
       this.countryBind(this.CData.state.id);
       this.form = this.fb.group({
         id: this.CData.id,
@@ -63,48 +76,91 @@ export class CityCreateComponent {
       });
     }
 
+    this.loadCountry();
+    this.loadState();
+  }
 
+  loadCountry(){debugger
+    this.countryCtrl = new FormControl();
+    this.filteredCountry = this.countryCtrl.valueChanges.pipe(
+      startWith(''),
+      map((country) =>
+        country ? this.filtercountry(country) : this.service2.countries.slice()
+      )
+    );
+
+    
 
   }
 
+  loadState(){debugger
+    
+    this.stateCtrl = new FormControl();
+    this.filteredState = this.stateCtrl.valueChanges.pipe(
+      startWith(''),
+      map((item) =>
+        item ? this.filterState(item) : this.service.states.slice()
+      )
+    );
+
+  }
+  
+  filtercountry(name: any) {
+    let arr = this.service2.countries.filter(
+      (country) => country.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+
+    if (arr.length == 1) {
+      this.form.controls['countryId'].setValue(arr[0].id);
+      this.GetStateByCountryId(arr[0].id);
+    }
+    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
+  }
+
+  filterState(name: any) {
+    let arr = this.service.states.filter(
+      (item) => item.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+
+    if (arr.length == 1) {
+      this.form.controls['stateId'].setValue(arr[0].id);
+    }
+    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
+  }
+
   SubmitForm() {
-    debugger
     this.form.markAllAsTouched();
     if (this.form.valid) {
       if (this.form.value.id == 0) {
-        this.service.CreateCity(this.form.value).subscribe(p => {
-          debugger
+        this.service.CreateCity(this.form.value).subscribe((p) => {
           if (p) {
-            this.toastr.success('City Saved Successfully');
+            this.snackBarService.openSnackbar("City Saved Successfully", "success");
             this.close();
           }
         }),
-          error => {
-            this.toastr.success(error);
-          }
+          (error) => {
+            this.snackBarService.openSnackbar(error.message, "error");           
+          };
+      } else {
+        this.service
+          .UpdateCity(this.form.value.id, this.form.value)
+          .subscribe((p) => {
+            if (p) {
+              this.snackBarService.openSnackbar("City Updated Successfully", "success");
+              this.close();
+            }
+          }),
+          (error) => {
+            this.snackBarService.openSnackbar(error.message, "error");
+          };
       }
-      else {
-        this.service.UpdateCity(this.form.value.id, this.form.value).subscribe(p => {
-          debugger
-          if (p) {
-            this.toastr.success('City Updated Successfully');
-            this.close();
-          }
-        }),
-          error => {
-            this.toastr.success(error);
-          }
-      }
-    }
-    else {
-      this.toastr.error('Form Invalid');
+    } else {
+      this.snackBarService.openSnackbar("invalid form", "error");
       this.form.markAllAsTouched();
-
     }
   }
 
   isactiveChange(val) {
-    debugger
     this.form.value.isActive = val?.checked;
   }
 
@@ -116,56 +172,45 @@ export class CityCreateComponent {
     this.dialogRef.close();
   }
 
-
   GetCountryList() {
-    debugger
-    this.service2.GetCountryList().subscribe(p => {
-      debugger
+    this.service2.GetCountryList().subscribe((p) => {
       if (p.success == true) {
         this.service2.countries = p?.data;
       }
     }),
-      error => {
-        debugger;
-        console.log(error);
-      }
-
+      (error) => {
+        this.snackBarService.openSnackbar(error.message, "error");
+      };
   }
 
-  countryChange(id: any) {
-    debugger;
-    this.service.GetStateByCountryId(id).subscribe(p => {
-      debugger
+  GetStateByCountryId(id: any) {
+    this.service.GetStateByCountryId(id).subscribe((p) => {
       if (p.success == true) {
+        debugger
         this.service.states = p?.data;
+        this.loadState();
       }
     }),
-      error => {
-        debugger;
-        console.log(error);
-      }
+      (error) => {
+        this.snackBarService.openSnackbar(error.message, "error");
+      };
   }
 
   countryBind(id: any) {
-    debugger;
-    this.service.GetCountryByStateId(id).subscribe(p => {
-      debugger
+    this.service.GetCountryByStateId(id).subscribe((p) => {
       if (p.success == true) {
-        this.selectedCountry = p.data.id;
-        this.form.value.countryId = p.data.id;
-        this.countryChange(p.data.id);
-       
-        //this.service.states = p?.data;
+        this.selectedCountry = p.data.name;
+        this.form.controls['countryId'].setValue(p.data.id);
+        this.GetStateByCountryId(p.data.id);
       }
     }),
-      error => {
-        debugger;
-        console.log(error);
-      }
+      (error) => {
+        this.snackBarService.openSnackbar(error.message, "error");
+      };
   }
 
   stateChange(id: any) {
-    debugger;
-    this.form.value.stateId = id;
+    this.form.controls['stateId'].setValue(id);
+    // this.form.value.stateId = id;
   }
 }

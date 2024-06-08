@@ -1,18 +1,25 @@
+import { error } from 'jquery';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { StateService } from '../state.service';
-import { ToastrService } from 'ngx-toastr';
 import { CountryService } from '../../Country/country.service';
 import { CountryData } from '../../Country/country-list/country-list.component';
+import { Observable, map, startWith } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 @Component({
   selector: 'app-state-create',
   templateUrl: './state-create.component.html',
   styleUrl: './state-create.component.scss',
 })
 export class StateCreateComponent implements OnInit {
-  color: ThemePalette = 'primary';
+  color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
   nationality: any;
@@ -21,13 +28,16 @@ export class StateCreateComponent implements OnInit {
   countryList: CountryData[] = [];
   selectedCountry;
 
+  countryCtrl: FormControl<any>;
+  filteredCountry: Observable<unknown>;
+
   constructor(
     public dialogRef: MatDialogRef<StateCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _formBuilder: FormBuilder,
     private _stateService: StateService,
     private _countryService: CountryService,
-    private _toastr: ToastrService
+    private _snackBarService: SnackBarService
   ) {
     this.stateData = data?.state;
     if (!this.stateData) {
@@ -39,21 +49,41 @@ export class StateCreateComponent implements OnInit {
         latitude: ['', Validators.required],
         longitude: ['', Validators.required],
         countryId: ['', Validators.required],
-        isActive: ['', Validators.required],
+        isActive: [true],
       });
     } else {
-      this.selectedCountry = this.stateData.country.id
+      this.selectedCountry = this.stateData.country.name;
       this.stateForm = this._formBuilder.group({
         id: this.stateData.id,
         name: [this.stateData.name],
         code: [this.stateData.code],
-        countryId: [this.stateData.country],
+        countryId: [this.stateData.country.id],
         gstCode: [this.stateData.gstCode],
         latitude: [this.stateData.latitude],
         longitude: [this.stateData.longitude],
         isActive: [this.stateData.isActive],
       });
     }
+
+    this.countryCtrl = new FormControl();
+
+    this.filteredCountry = this.countryCtrl.valueChanges.pipe(
+      startWith(''),
+      map((item) =>
+        item ? this.filterCountry(item) : this._countryService.countries.slice()
+      )
+    );
+  }
+
+  filterCountry(name: any) {
+    let arr = this._countryService.countries.filter(
+      (item) => item.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+
+    if (arr.length == 1) {
+      this.stateForm.controls['countryId'].setValue(arr[0].id);
+    }
+    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
   }
 
   ngOnInit(): void {
@@ -62,38 +92,32 @@ export class StateCreateComponent implements OnInit {
 
   GetCountryList() {
     this._countryService.GetCountryList().subscribe((res: any) => {
-      this.countryList = res.data;
-    });
+      this._countryService.countries = res.data;
+    }),
+      (error) => {
+        this._snackBarService.openSnackbar(error.message, 'Close');
+      };
   }
 
   SubmitForm() {
     if (this.stateForm.valid) {
       if (this.stateForm.value.id == 0) {
-        // const payload = {
-        //   ...this.stateForm.value,
-        //   updatedBy: 1,
-        //   createdBy: 3,
-        // };
-        // /console.log(payload, 'create state')
         this._stateService.CreateState(this.stateForm.value).subscribe((p) => {
-          this._toastr.success('State Saved Successfully');
+          this._snackBarService.openSnackbar(
+            'State Saved Successfully',
+            'close'
+          );
           this.close();
         });
       } else {
-        debugger
-        // const payload = {
-        //   ...this.stateForm.value,
-        //   updatedBy: 1,
-        //   createdBy: 3,
-        // };
-
-        // console.log(payload, 'update state')
-        this._stateService.UpdateState(this.stateForm.value.id, this.stateForm.value)
+        this._stateService
+          .UpdateState(this.stateForm.value.id, this.stateForm.value)
           .subscribe((p) => {
-            // if (p) {
-            this._toastr.success('State Updated Successfully');
+            this._snackBarService.openSnackbar(
+              'State Updated Successfully',
+              'close'
+            );
             this.close();
-            // }
           });
       }
     } else {

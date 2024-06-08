@@ -40,13 +40,28 @@
                             </div>
     
                             <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field appearance="outline" class="w-100">
+                                <!-- <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Currency</mat-label>
                                     <mat-select (ngModel)="selectedCurrency" formControlName="currencyId" (onChange)="currencyChange($event)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let item of confService.currency" [value]="item.id" 
                                             >{{item.symbol}} {{item.name}}</mat-option>
                                     </mat-select>
+                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                </mat-form-field> -->
+
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Currency</mat-label>
+                                    <input matInput aria-label="Currency" [matAutocomplete]="auto"
+                                        [formControl]="currencyCtrl" required (click)="LoadCurrency()"/>
+                                        
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let item of filteredCurrency | async"
+                                            [value]="item.name"
+                                            >
+                                            <span>{{item.symbol}} - {{ item.name }} </span>
+                                        </mat-option>
+                                    </mat-autocomplete>
                                     <mat-icon matSuffix>attach_money</mat-icon>
                                 </mat-form-field>
                             </div>
@@ -126,11 +141,12 @@
     
                             <div class="col-12 col-md-12 ">
                                 <div class="d-flex gap-3">
-                                    <button mat-flat-button color="success" class="px-4" type="button"
+                                    <button mat-flat-button class="px-4 btn-green" type="button"
                                         (click)="SubmitForm()">Submit</button>
                                     <button mat-stroked-button class="px-4" (click)="Reset()">Reset</button>
                                 </div>
                             </div>
+                            
                         </div>
                     </form>
                 </mat-card-content>

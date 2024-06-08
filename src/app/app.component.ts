@@ -30,10 +30,8 @@ ngOnInit(): void {
   // showSnackbarAction(content, action) {
   //   let snack = this.snackBar.open(content, action);
   //   snack.afterDismissed().subscribe(() => {
-  //     console.log("This will be shown after snackbar disappeared");
   //   });
   //   snack.onAction().subscribe(() => {
-  //     console.log("This will be called when snackbar button clicked");
   //   });
   // }
   // showSnackbarDuration(content, action, duration) {

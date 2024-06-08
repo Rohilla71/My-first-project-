@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppIcon } from './app-icon';
 import { SidebarService } from './../sidebar/sidebar.service'
 import { AuthService } from 'src/app/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -13,33 +14,50 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 
 export class HeaderComponent implements OnInit {
-
-  constructor( public sidebarservice: SidebarService , private authService: AuthService) {
-
+  userDataList;
+  userImage="";
+  baseUrl = environment.ImgUrl;
+  
+  constructor(public sidebarservice: SidebarService, private authService: AuthService) {
+    this.loadData();
   }
 
   theme_name = 'dark_mode'
 
   toggleSearch: boolean = false;
 
-  darkMode() {
-    
-    if(this.theme_name == 'light_mode' ) {
-      document.querySelector("html").classList.replace('dark_mode' , 'light_mode');
-      this.theme_name = 'dark_mode'
+  loadData() {
+    this.authService.getCurrentUserDetail().subscribe(p => {
       
-    } else if(this.theme_name == 'dark_mode' ) {
-      document.querySelector("html").classList.replace('light_mode' , 'dark_mode');
+      this.userDataList = p.data;
+
+      if(this.userDataList?.profileImageURL != null){
+        this.userImage = this.userDataList?.profileImageURL;
+      }
+      else{
+        this.userImage = "assets/images/avatars/avatar-27.jpg";
+      }
+    })
+  }
+
+  darkMode() {
+
+    if (this.theme_name == 'light_mode') {
+      document.querySelector("html").classList.replace('dark_mode', 'light_mode');
+      this.theme_name = 'dark_mode'
+
+    } else if (this.theme_name == 'dark_mode') {
+      document.querySelector("html").classList.replace('light_mode', 'dark_mode');
       this.theme_name = 'light_mode'
 
     }
-     return this.theme_name;
+    return this.theme_name;
   }
 
   getSideBarSate() {
     return this.sidebarservice.getSidebarState();
   }
-  
+
 
   toggleSidebar() {
     this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());
@@ -81,7 +99,7 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
-  
+
 
   }
 

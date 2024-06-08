@@ -1,12 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CountryCreateComponent } from '../country-create/country-create.component';
 import { CountryService } from '../country.service';
-
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 export interface CountryData {
   id: number;
@@ -28,12 +27,22 @@ export interface CountryData {
 @Component({
   selector: 'app-country-list',
   templateUrl: './country-list.component.html',
-  styleUrl: './country-list.component.scss'
+  styleUrl: './country-list.component.scss',
 })
-export class CountryListComponent {
-
-  // displayedColumns: string[] = ['id', 'name', 'code', 'callingCode', 'currencyId', 'isActive', 'capital', 'latitude', 'longitude', 'timeZone', 'flagEmoji', 'nationality', 'createdBy', 'updatedBy', 'actions'];
-  displayedColumns: string[] = [ 'id', 'name', 'code', 'callingCode', 'capital', 'nationality',   'latitude', 'longitude', 'lastActionBy', 'lastActionOn', 'isActive', 'actions'];
+export class CountryListComponent implements OnInit {
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'code',
+    'callingCode',
+    'capital',
+    'latitude',
+    'longitude',
+    'lastActionBy',
+    'lastActionOn',
+    'isActive',
+    'actions',
+  ];
 
   isLoading = true;
   dataSource: MatTableDataSource<CountryData>;
@@ -41,59 +50,52 @@ export class CountryListComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public countryService: CountryService,
-    public dialog: MatDialog,
-    //private toastr: ToastrService
-  ) {
-    debugger
+  constructor(
+    public countryService: CountryService,
+    public dialog: MatDialog, //private toastr: ToastrService
+    public snackBarService : SnackBarService
+  ) {}
+
+  ngOnInit(): void {
     this.GetCountryList();
   }
-
 
   //region
 
   add(): void {
-    debugger
-    
     const dialogRef = this.dialog.open(CountryCreateComponent, {
-      // width: '600px',
-      disableClose: true
-      //  /data: {name: this.name, animal: this.animal}
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.GetCountryList();
-      console.log('The dialog was closed');
     });
   }
 
   edit(country: any): void {
-    debugger
     const dialogRef = this.dialog.open(CountryCreateComponent, {
       width: '800px',
       data: { country },
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.GetCountryList();
-      console.log('The dialog was closed');
     });
   }
 
   // delete(id: any): void {
-  //   debugger
+  //
 
   //   this.configService.DeleteCountry(id).subscribe(p => {
-  //     debugger
+  //
   //     if (p) {
   //       this.configService.countries = p;
   //       this.bindTable(this.configService.countries);
   //     }
   //   }),
   //     error => {
-  //       debugger;
-  //       console.log(error);
+  //       ;
   //     }
   // //   const dialogRef = this.dialog.open(AddCountryComponent, {
   // //     width: '800px',
@@ -103,26 +105,25 @@ export class CountryListComponent {
 
   // //   dialogRef.afterClosed().subscribe(result => {
   // //     this.GetCountryList();
-  // //     console.log('The dialog was closed');
   // //   });
   // }
 
   GetCountryList() {
-    debugger
-    this.countryService.GetCountryList().subscribe(p => {
-      debugger
+    this.countryService.GetCountryList().subscribe((p) => {
       if (p.success == true) {
         this.isLoading = false;
         this.countryService.countries = p?.data;
+        this.dataSource = new MatTableDataSource(this.countryService.countries);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.bindTable(this.countryService.countries);
       }
     }),
-      error => {
-        debugger;
+      (error) => {
+        debugger
+        this.snackBarService.openSnackbar(error.message, "error");
         this.isLoading = false;
-        console.log(error);
-      }
-
+      };
   }
 
   bindTable(data: any) {
@@ -134,8 +135,10 @@ export class CountryListComponent {
   //endregion
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.dataSource !== undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   applyFilter(event: Event) {

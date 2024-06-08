@@ -1,0 +1,89 @@
+<!-- <h6 class="mb-0 text-uppercase">Country Master</h6>
+<div class="example-button-row">
+    <button mat-flat-button color="primary">Add</button>
+</div> -->
+
+<div class="container">
+    <mat-card class="mat-card-margin">
+    <mat-card-content>
+        <fieldset class="fieldset-class">
+            <legend>File Upload Section</legend>
+<div class="row g-3">
+            <div class="col-6 col-md-6 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>File Description </mat-label>
+                    <textarea cdkTextareaAutosize  ([ngModel])="description"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" matInput ></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6">       
+                <div class="file-upload">
+                <input type="file" class="file-upload"
+                 (onchange)="fileUpload($event)">
+                </div>
+        </div>
+        </div>
+
+            <div class="d-flex gap-3 btn-class">
+                <button
+                mat-flat-button color="success" class="px-4" type="button" (click)="upload()"
+                    >Upload</button>
+        </div>
+
+            </fieldset>
+<hr>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)"  #input>
+        </mat-form-field>
+
+        <div class="sorting-table table-responsive">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> SN.NO </th>
+                    <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}}  </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FILE NAME </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FILE DESCRIPTION </th>
+                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="docPath">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FILE PATH </th>
+                    <td mat-cell *matCellDef="let row"> {{row.docPath}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate" [diameter]="50">
+                </mat-progress-spinner>
+            </div>
+
+            <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of countries"></mat-paginator>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+</div>

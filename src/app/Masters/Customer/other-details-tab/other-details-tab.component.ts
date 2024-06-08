@@ -18,15 +18,15 @@ export class OtherDetailsTabComponent implements OnInit {
   public taxTreatmentArray = []
   constructor(private fb: FormBuilder, private createCustomerService: CreateCustomerService ) {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      currency: [''],
-      langtaxPreferenceuage: [''],
-      pan: ['', Validators.required],
-      accNo:['', Validators.required],
-      accRef: ['', Validators.required],
-      termsCondn: [''],
+      displayName: ['', Validators.required],
+      currencyId: [''],
+      taxTreatmentId: [''],
+      panno: ['', Validators.required],
+      accountNo:['', Validators.required],
+      accountReference: ['', Validators.required],
+      termsConditions: [''],
       disclaimer: [''],
-      taxPreference: ['', Validators.required]
+      taxPreferenceId: ['', Validators.required]
     });
     this.getTaxTreatment()
     this.getCurrencylist()

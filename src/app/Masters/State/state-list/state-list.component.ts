@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StateService } from '../state.service';
 import { State, StateList } from '../state.types';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { StateCreateComponent } from '../state-create/state-create.component';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-state-list',
@@ -33,7 +33,7 @@ export class StateListComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private _stateService: StateService, public dialog: MatDialog) {}
+  constructor(private _stateService: StateService, public dialog: MatDialog, private _snackBarService: SnackBarService) {}
 
   ngOnInit(): void {
     this.getAllStateList();
@@ -64,6 +64,7 @@ export class StateListComponent implements OnInit {
     }),
     error=>{
       this.isLoading = false;
+      this._snackBarService.openSnackbar(error.message, 'Close');
     };
   }
 
@@ -101,7 +102,6 @@ export class StateListComponent implements OnInit {
 
   deleteState(stateId: number) {
     this._stateService.DeleteState(stateId).subscribe((res: any) => {
-      console.log(res);
     });
   }
 }

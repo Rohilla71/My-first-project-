@@ -1,13 +1,12 @@
 .container {
-  height: 70%;
+  // height: 73%;
   width: 50%;
   // display: none;
   position: fixed;
   top: 10%;
   left: 25%;
-  background: #fff;
   z-index: 1;
-  overflow: auto;
+  overflow: none;
 }
 
 .mat-success {

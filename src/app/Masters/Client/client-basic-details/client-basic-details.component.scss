@@ -1,0 +1,80 @@
+.container {
+    // height: 52%;
+    // width: 48%;
+    // // display: none;
+    // position: fixed;
+    // top: 13%;
+    // left: 25%;
+    background: #fff;
+    z-index: 1;
+  //  overflow:auto;
+    padding-top: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.dialog-responsive {
+  width: 40%;
+}
+
+@media only screen and (max-width: 760px) {
+  .dialog-responsive {
+      width: 100%;
+  }
+}
+
+.mat-success {
+    background-color: green;
+    color: #fff;
+}
+.btn-class {
+    justify-content: center;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 65px;
+}
+
+.example-margin {
+  margin: 10px;
+}
+.btn-class {
+  margin-bottom: 0px;
+}
+// ::ng-deep .mat-mdc-text-field-wrapper {
+//   height: 40px !important;
+// }
+// ::ng-deep .mat-mdc-form-field-flex {
+//   margin-top: -7px !important;
+// }
+
+
+
+
+.file-upload{
+    margin-top: 0px;
+}
+
+.form-margin {
+    margin-top: 15px;
+}
+.mat-card-margin {
+    margin-top: 20px;
+}
+.fieldset-class {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.mat-success {
+    background-color: green;
+    color: #fff;
+}

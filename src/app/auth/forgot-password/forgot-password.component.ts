@@ -36,7 +36,6 @@ export class ForgotPasswordComponent implements OnInit {
       },   
       next: (resp) => {
           this.router.navigateByUrl('auth/reset-password?email='+this.forgotForm.controls['usernameOrEmail'].value+''); 
-          console.log(resp)
         },  
           
   });

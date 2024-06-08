@@ -259,16 +259,6 @@
           "isActive": true
         },
         {
-          "id": 36,
-          "name": "Customer",
-          "parentId": 11,
-          "sequence": 33,
-          "iconUrl": null,
-          "iconClass": "arrow_right",
-          "navigateUrl":"masters/customer-list",
-          "isActive": true
-        },
-        {
           "id": 34,
           "name": "Product",
           "parentId": 6,

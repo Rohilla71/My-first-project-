@@ -15,7 +15,6 @@ export class StateService {
       .get<State>(`${environment.APiUrl}Master/GetStateList`)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(() => err);
         })
       );
@@ -26,7 +25,6 @@ export class StateService {
       .get(`${environment.APiUrl}Master/GetState${id}`)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(() => err);
         })
       );
@@ -43,7 +41,6 @@ export class StateService {
       .post(`${environment.APiUrl}Master/CreateState`, payload)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(() => err);
         })
       );
@@ -54,7 +51,6 @@ export class StateService {
       .delete(`${environment.APiUrl}Master/DeleteState/${id}`)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(() => err);
         })
       );
@@ -71,7 +67,6 @@ export class StateService {
       .patch(`${environment.APiUrl}Master/UpdateState/${id}`, payload)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(() => err);
         })
       );

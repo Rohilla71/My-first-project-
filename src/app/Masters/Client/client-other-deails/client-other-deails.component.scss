@@ -1,0 +1,51 @@
+.file-upload{
+    margin-top: 0px;
+}
+
+.form-margin {
+    margin-top: 15px;
+}
+.mat-card-margin {
+    margin-top: 20px;
+}
+.fieldset-class {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.mat-success {
+    background-color: green;
+    color: #fff;
+}
+
+
+.editor {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .NgxEditor__MenuBar {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  
+    .NgxEditor {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border: none;
+    }
+  
+    .CodeMirror {
+      border: 1px solid #eee;
+      height: auto;
+      margin-bottom: 0.7rem;
+  
+      pre {
+        white-space: pre !important;
+      }
+    }
+  }
+  .image-class {
+    width: 100px;
+    height: 100px;
+  }

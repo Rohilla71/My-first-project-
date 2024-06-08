@@ -1,54 +1,83 @@
 <!-- <div class="row g-4"> -->
-    <div class="container ">
-        <div class="col-12 col-xl-12">
-            <br>
-            <mat-card>
-                <mat-card-content>
-                    <div class="row">
-                        <div class="col-11">
-                            <h5 class="mb-3">City Form</h5>
-                        </div>
-                        <div class="col-1">
-                            <!-- <button mat-flat-button color="warn" class="px-2" type="button"(click)="close()"> <mat-icon matSuffix>close</mat-icon></button> -->
-                            <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
-                        </div>
+<div class="container ">
+    <div class="col-12 col-xl-12">
+        <br>
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-11">
+                        <h5 class="mb-3">City Form</h5>
                     </div>
-    
-                    <form [formGroup]="form">
-                        <div class="row g-3">
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Name</mat-label>
-                                    <input matInput formControlName="name">
-                                    <mat-icon matSuffix>account_circle</mat-icon>
-                                </mat-form-field>
-                            </div>
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field appearance="outline" class="w-100">
+                    <div class="col-1">
+                        <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                    </div>
+                </div>
+
+                <form [formGroup]="form">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name">
+                                <mat-icon matSuffix>account_circle</mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <!-- <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Country</mat-label>
-                                    <mat-select formControlName="countryId" [(ngModel)]="selectedCountry" (selectionChange)="countryChange($event.value)">
+                                    <mat-select formControlName="countryId" [(ngModel)]="selectedCountry" >
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let item of service2.countries"
                                             [value]="item.id">{{item.name}}</mat-option>
                                     </mat-select>
                                     <mat-icon matSuffix>language</mat-icon>
-                                </mat-form-field>
-                            </div>
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>State</mat-label>
-                                    <mat-select [(ngModel)]="selectedState" formControlName="stateId">
-                                        <mat-option>None</mat-option>
-                                        <mat-option *ngFor="let item of service.states" [value]="item.id"
-                                            (onchange)="stateChange(item.id)">{{item.name}}</mat-option>
-                                    </mat-select>
-                                    <mat-icon matSuffix>filter_hdr</mat-icon>
-                                </mat-form-field>
-                            </div>
-    
-                            <!-- <div class="col-12 col-md-12 col-lg-6">
+                                </mat-form-field> -->
+
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Country</mat-label>
+                                <input matInput aria-label="Country" [(ngModel)]="selectedCountry" [matAutocomplete]="autoC"
+                                    [formControl]="countryCtrl" required (click)="loadCountry()"/>
+                                    
+                                <mat-autocomplete #autoC="matAutocomplete">
+                                    <mat-option *ngFor="let country of filteredCountry | async"
+                                        [value]="country.name" 
+                                        (onclick)="GetStateByCountryId(country.id)">
+                                        <span>{{ country.name }} </span>
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-icon matSuffix>language</mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>State</mat-label>
+                                <input matInput aria-label="State"  [(ngModel)]="selectedState" [matAutocomplete]="auto1"
+                                    [formControl]="stateCtrl" required />
+                                    
+                                <mat-autocomplete #auto1="matAutocomplete">
+                                    <mat-option *ngFor="let item of filteredState | async"
+                                        [value]="item.name" 
+                                        (onclick)="stateChange(item.id)">
+                                        <span>{{ item.name }} </span>
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-icon matSuffix>business</mat-icon>
+                            </mat-form-field>
+
+                            <!-- <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>State</mat-label>
+                                <mat-select [(ngModel)]="selectedState" formControlName="stateId">
+                                    <mat-option>None</mat-option>
+                                    <mat-option *ngFor="let item of service.states" [value]="item.id"
+                                        (onchange)="stateChange(item.id)">{{item.name}}</mat-option>
+                                </mat-select>
+                                <mat-icon matSuffix>filter_hdr</mat-icon>
+                            </mat-form-field> -->
+                        </div>
+
+                        <!-- <div class="col-12 col-md-12 col-lg-6">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>isActive</mat-label>
                                     <mat-select formControlName="isActive">
@@ -58,44 +87,39 @@
                                     <mat-icon matSuffix>check_circle_outline</mat-icon>
                                 </mat-form-field>
                             </div> -->
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Latitude</mat-label>
-                                    <input matInput formControlName="latitude" type="number">
-                                    <mat-icon matSuffix>edit_location</mat-icon>
-                                </mat-form-field>
-                            </div>
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Longitude</mat-label>
-                                    <input matInput formControlName="longitude" type="number">
-                                    <mat-icon matSuffix>edit_location</mat-icon>
-                                </mat-form-field>
-                            </div>
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <!-- <label>isActive: </label> -->
-                                <!-- <mat-radio-group formControlName="isActive">
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Latitude</mat-label>
+                                <input matInput formControlName="latitude" type="number">
+                                <mat-icon matSuffix>edit_location</mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Longitude</mat-label>
+                                <input matInput formControlName="longitude" type="number">
+                                <mat-icon matSuffix>edit_location</mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <!-- <label>isActive: </label> -->
+                            <!-- <mat-radio-group formControlName="isActive">
                                     <mat-radio-button value="true">True</mat-radio-button>
                                     <mat-radio-button value="false">False</mat-radio-button>
                                 </mat-radio-group> -->
-                                <section class="example-section">
-                                    <mat-slide-toggle 
-                                    formControlName="isActive"
-                                    (change)="isactiveChange($event)"
-                                        class="example-margin"
-                                        [color]="color"
-                                        [checked]="checked"
-                                        [disabled]="disabled"
-                                        labelPosition="before">
-                                        IsActive :
-                                    </mat-slide-toggle>
-                                  </section>
-                            </div>
-    
-                            <!-- <div class="col-12 col-md-12 col-lg-6">
+                            <section class="example-section">
+                                <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
+                                    class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                                    labelPosition="before">
+                                    IsActive :
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+
+                        <!-- <div class="col-12 col-md-12 col-lg-6">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>isActive</mat-label>
                                     <mat-select formControlName="isActive">
@@ -105,20 +129,20 @@
                                     <mat-icon matSuffix>check_circle_outline</mat-icon>
                                 </mat-form-field>
                             </div> -->
-    
-    
-    
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="d-flex gap-3">
-                                    <button mat-flat-button color="success" class="px-4" type="button"
-                                        (click)="SubmitForm()">Submit</button>
-                                    <button mat-stroked-button class="px-4" (click)="Reset()">Reset</button>
-                                </div>
+
+
+
+                        <div class="col-12 col-md-12 col-lg-6">
+                            <div class="d-flex gap-3">
+                                <button mat-flat-button class="px-4 btn-green" type="button"
+                                    (click)="SubmitForm()">Submit</button>
+                                <button mat-stroked-button class="px-4" (click)="Reset()">Reset</button>
                             </div>
                         </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
-    <!-- </div> -->
+</div>
+<!-- </div> -->

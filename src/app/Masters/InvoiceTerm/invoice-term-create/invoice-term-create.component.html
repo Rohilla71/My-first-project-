@@ -1,0 +1,54 @@
+<div class="container ">
+    <div class="col-12 col-xl-12">
+        <br>
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-11">
+                        <h5 class="mb-3">Invoice Term Form</h5>
+                    </div>
+                    <div class="col-1 close-button">
+                        <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                    </div>
+                </div>
+                <form [formGroup]="invoiceTermForm">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <input matInput formControlName="description" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <section class="example-section">
+                                <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
+                                    class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                                    labelPosition="before">
+                                    IsActive :
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                            <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                                Submit
+                            </button>
+                            <button mat-stroked-button class="px-4" (click)="Reset()">
+                                Reset
+                            </button>
+                        </mat-dialog-actions>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
