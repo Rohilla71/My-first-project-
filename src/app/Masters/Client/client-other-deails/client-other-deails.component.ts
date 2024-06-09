@@ -60,22 +60,35 @@ export class ClientOtherDeailsComponent implements OnInit {
 
 
   otherDetailsTabData(customerId) {
-    this.createCustomerService.getotherdetailstab(customerId).subscribe((list: any) => {
-
-      this.form.setValue(list.data)
-      if (list.data.logopath) {
-        this.userImage = list.data.logopath
+    this.createCustomerService.getotherdetailstab(customerId).subscribe({next:(resp: any) => {
+      if (resp.data.logopath) {
+        this.userImage = resp.data.logopath
         this.isLogoPath = true
       }
-    },
-      (error: any) => {
-        throw error
-      })
+
+      const formData = {
+        id: resp.data.id,
+        displayName: resp.data.displayName,
+        currencyId: resp.data.currencyId,
+        taxTreatmentId: resp.data.taxTreatmentId,
+        logopath: resp.data.logopath,
+        panno: resp.data.panno,
+        accountNo: resp.data.accountNo,
+        accountReference: resp.data.accountReference,
+        termsConditions: resp.data.termsConditions,
+        disclaimer: resp.data.disclaimer,
+        taxPreferenceId: resp.data.taxPreferenceId,
+
+      }
+      this.form.setValue(formData)
+    }
+  },
+)
   }
   fileUpload(event) {
 
-   this.logoImage=event.target.files[0]
-    this.form.patchValue({ File: event.target.files[0]});
+    this.logoImage = event.target.files[0]
+    this.form.patchValue({ File: event.target.files[0] });
     // const file: File = event.target.files[0];
     // const reader = new FileReader()
     // reader.onloadend = () => {
@@ -92,18 +105,19 @@ export class ClientOtherDeailsComponent implements OnInit {
     //this.form.get('logopath').setValue(this.logoImage)
     // if (this.form.valid) {
 
-    let formData: any = new FormData();        
-    Object.keys(this.form.controls).forEach(formControlName => { 
-      formData.append(formControlName,  this.form.get(formControlName).value);    
-    }); 
-    formData.append("File",  this.logoImage); 
-    
+    let formData: any = new FormData();
+    Object.keys(this.form.controls).forEach(formControlName => {
+      formData.append(formControlName, this.form.get(formControlName).value);
+    });
+    formData.append("File", this.logoImage);
+
     this.createCustomerService.UpdateOtherDetails(formData, this.cid).subscribe(p => {
       if (p) {
         this.snackBarService.showSnackbarTopPosition('Saved Successfully', 'Dismiss')
         // @rahul-ask where to navigate after submit
         // this.close();  
         //  this.router.navigate(['/other-details'])
+        this.otherDetailsTabData(this.cid)
       }
     }),
       error => {
@@ -121,30 +135,27 @@ export class ClientOtherDeailsComponent implements OnInit {
 
   // @rahul ask- no api avail
   async getTaxTreatment() {
-    await this.createCustomerService.getTaxTreatment().subscribe((list: any) => {
-      this.taxTreatmentArray = list.data
-    },
-      (error: any) => {
-        throw error
-      })
+    await this.createCustomerService.getTaxTreatment().subscribe({
+      next: (list: any) => {
+        this.taxTreatmentArray = list.data
+      }
+    }
+    )
   }
 
   getCurrencylist() {
-    this.createCustomerService.getCurrency().subscribe((list: any) => {
+    this.createCustomerService.getCurrency().subscribe({
+      next:(list: any) => {
       this.currencyArray = list.data
-    },
-      (error: any) => {
-        throw error
-      })
+    }
+  })
   }
 
   // @rahul ask- no api avail
   getTaxPref() {
-    this.createCustomerService.getTaxPreference().subscribe((list: any) => {
+    this.createCustomerService.getTaxPreference().subscribe({next:(list: any) => {
       this.taxPreferenceArray = list.data
-    },
-      (error: any) => {
-        throw error
-      })
+    }
+  })
   }
 }

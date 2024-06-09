@@ -2,139 +2,135 @@
     <mat-card-content>
         <fieldset class="fieldset-class">
             <legend>Other Details</legend>
-        <form class="form-margin" [formGroup]="form" enctype="multipart/form-data">
-            <div class="row g-3">
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Display Name</mat-label>
-                        <input matInput formControlName="displayName">
-                       
-                    </mat-form-field>
+            <form class="form-margin" [formGroup]="form" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Display Name</mat-label>
+                            <input matInput formControlName="displayName">
+
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Currency</mat-label>
+                            <mat-select formControlName="currencyId" required>
+                                @for (curr of currencyArray; track curr) {
+                                <mat-option [value]="curr.id">{{curr.name}}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Currency</mat-label>
-                        <mat-select formControlName="currencyId" required>
-                          @for (curr of currencyArray; track curr) {
-                          <mat-option [value]="curr.id">{{curr.name}}</mat-option>
-                          }
-                        </mat-select>
-                      </mat-form-field>
+
+                <div class="row g-3">
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Tax Treatment</mat-label>
+                            <mat-select formControlName="taxTreatmentId" required>
+                                @for (tax of taxTreatmentArray; track tax) {
+                                <mat-option [value]="tax.id">{{tax.taxName}}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>PAN</mat-label>
+                            <input matInput formControlName="panno">
+
+                        </mat-form-field>
+                    </div>
+
+
                 </div>
-               </div>
-        
-               <div class="row g-3">
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Tax Treatment</mat-label>
-                        <mat-select formControlName="taxTreatmentId" required>
-                          @for (tax of taxTreatmentArray; track tax) {
-                          <mat-option [value]="tax.id">{{tax.taxName}}</mat-option>
-                          }
-                        </mat-select>
-                      </mat-form-field>
+
+                <div class="row g-3">
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Account Number</mat-label>
+                            <input matInput formControlName="accountNo">
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Account Reference</mat-label>
+                            <input matInput formControlName="accountReference">
+                        </mat-form-field>
+
+                    </div>
                 </div>
-        
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>PAN</mat-label>
-                        <input matInput formControlName="panno">
-                       
-                    </mat-form-field>
-                </div>
-        
-                
-               </div>
-        
-               <div class="row g-3">
-                
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Account Number</mat-label>
-                        <input matInput formControlName="accountNo">
-                    </mat-form-field>
-        
-                </div>
-        
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Account Reference</mat-label>
-                        <input matInput formControlName="accountReference">
-                    </mat-form-field>
-        
-                </div>
-               </div>
-        
-               <div class="row g-3">
-                
-                <div class="col-6 col-md-6 col-lg-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Tax Preference</mat-label>
-                        <mat-select formControlName="taxPreferenceId" required>
-                          @for (tax of taxPreferenceArray; track tax) {
-                          <mat-option [value]="tax.id">{{tax.preferName}}</mat-option>
-                          }
-                        </mat-select>
-                      </mat-form-field>
-                </div>
-        
-                <div class="col-6 col-md-6 col-lg-6">
-                        
-                        <div class="file-upload"> Upload logo image:
-                            <div *ngIf="isLogoPath">    
-                            <img src="{{baseUrl+userImage}}" width="170" height="170"
-                            class="iamge-class" alt="">
+
+                <div class="row g-3">
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Tax Preference</mat-label>
+                            <mat-select formControlName="taxPreferenceId" required>
+                                @for (tax of taxPreferenceArray; track tax) {
+                                <mat-option [value]="tax.id">{{tax.preferName}}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <div *ngIf="isLogoPath">
+                            <img src="{{userImage}}" width="70" height="70" class="iamge-class" alt="">
                         </div>
+                        <div class="file-upload"> Upload logo:
                             <!-- <img class="images" [src]="src/assets/images/app/apple-logo.png"/> -->
-                        <input type="file" class="file-upload" [accept]="reqfiletype"
-                         (change)="fileUpload($event)">
+                            <input type="file" class="file-upload" [accept]="reqfiletype" (change)="fileUpload($event)">
                         </div>
+                   
+                    </div>
+
                 </div>
-        
-               </div>
-        
-               <div class="row g-3">
-                
-                <div class="col-6 col-md-6 col-lg-6">
-                    <!-- <mat-form-field class="w-100" appearance="outline">
+
+                <div class="row g-3">
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <!-- <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Terms Conditions</mat-label>
                         <input matInput formControlName="termsConditions">
                        
                     </mat-form-field> -->
-                    <mat-label>Terms Conditions</mat-label>
-                    <div class="editor w-100 "  >
-                    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-                    <ngx-editor [editor]="editor" formControlName="termsConditions" [placeholder]="">
-                    </ngx-editor>   
+                        <mat-label>Terms Conditions</mat-label>
+                        <div class="editor w-100 ">
+                            <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                            <ngx-editor [editor]="editor" formControlName="termsConditions" [placeholder]="">
+                            </ngx-editor>
+                        </div>
                     </div>
-                </div>
-        
-                <div class="col-6 col-md-6 col-lg-6">
-                    <!-- <mat-form-field class="w-100" appearance="outline">
+
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <!-- <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Disclaimer</mat-label>
                         <input matInput formControlName="disclaimer">
                        
                     </mat-form-field> -->
-                    <mat-label>Disclaimer</mat-label>
-                    <div class="editor w-100 "  >
-                    <ngx-editor-menu [editor]="disclaimereditor"> </ngx-editor-menu>
-                    <ngx-editor [editor]="disclaimereditor" formControlName="disclaimer" [placeholder]="">
-                    </ngx-editor>   
+                        <mat-label>Disclaimer</mat-label>
+                        <div class="editor w-100 ">
+                            <ngx-editor-menu [editor]="disclaimereditor"> </ngx-editor-menu>
+                            <ngx-editor [editor]="disclaimereditor" formControlName="disclaimer" [placeholder]="">
+                            </ngx-editor>
+                        </div>
                     </div>
                 </div>
-               </div>
-            
-               <div class="row g-3 btn-class">
-                <div class="col-12 col-md-12 ">
-                    <div class="d-flex gap-3 btn-class">
-                        <button [disabled]="!form.valid"
-                        mat-flat-button color="success" class="px-4" type="button"
-                            (click)="SubmitForm()">Submit</button>
+
+                <div class="row g-3 btn-class">
+                    <div class="col-12 col-md-12 ">
+                        <div class="d-flex gap-3 btn-class" >
+                            <button [disabled]="!form.valid" mat-flat-button color="success" class="px-4" type="button"
+                                (click)="SubmitForm()">Submit</button>
+                        </div>
                     </div>
                 </div>
-               </div>
-        </form>
+            </form>
         </fieldset>
     </mat-card-content>
-  </mat-card>
-
+</mat-card>

@@ -1,5 +1,17 @@
 <div class="container">
 
+        <div class="row">
+          <div class="col-sm-11">
+            <h6 class="mb-0 text-uppercase">Client Info</h6>
+          </div>
+      
+          <div class="col-sm-1">
+            <!-- <button mat-flat-button color="primary" (click)="add()">Add</button> -->
+            <a mat-flat-button color="primary" [routerLink]="['/masters/client-list']">Back</a>
+          </div>
+      
+        </div>
+        <hr>
     <mat-card class="mat-card-margin">
         <mat-card-content>
             <fieldset class="fieldset-class">
@@ -227,7 +239,7 @@
 
                         <div class="col-4 col-md-4 ">
                             <div class="d-flex gap-3 btn-class">
-                                <button [disabled]="!form.valid" mat-flat-button color="success" class="px-4"
+                                <button [disabled]="!form.valid" mat-flat-button color="primary" class="px-4"
                                     type="button" (click)="SubmitForm()">Submit</button>
                                 <button mat-flat-button class="px-4" type="button" (click)="cancel()">Cancel</button>
 
