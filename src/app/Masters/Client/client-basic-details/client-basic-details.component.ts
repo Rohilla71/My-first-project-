@@ -40,7 +40,7 @@ export class ClientBasicDetailsComponent implements OnInit {
     this.form = this.fb.group({
       customerType: ['', Validators.required],
       companyName: ['', Validators.required],
-      customerEmail: ['', Validators.required],
+      customerEmail: ['', [Validators.required, Validators.email]],
       customerPhone: [''],
       customerMobile: ['', Validators.required],
       language: [''],

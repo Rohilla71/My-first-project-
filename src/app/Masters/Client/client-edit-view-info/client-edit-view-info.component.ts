@@ -41,7 +41,7 @@ export class ClientEditViewInfoComponent implements OnInit {
   form: FormGroup = this.fb.group({
     customerType: [{ value: '', disabled: true }, Validators.required],
     name: ['', Validators.required],
-    email: [{ value: '', disabled: true }],
+    email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     phone: [''],
     mobile: ['', Validators.required],
     language: [''],

@@ -1,0 +1,76 @@
+{
+    "errors": [],
+    "message": "",
+    "success": true,
+     "data": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "salutation": "Mr",
+      "firstName": "Vin2",
+      "lastName": "Pat1",
+      "countryId": 93,
+      "countryName": "India",
+      "stateName": "Delhi",
+      "cityName": "South Delhi",
+      "postalCode": "110055",
+      "stateId": 5552,
+      "cityId": 136794,
+      "postalCodeId": 173977,
+      "addressLine1": "test2",
+      "addressLine2": "test1",
+      "landmark": "testL",
+      "cEmail": "test@test.com",
+      "cPhone": "12345678",
+      "communicationType": "phone",
+      "isPrimary": true
+    },
+
+   
+    {
+        "id": 2,
+        "clientId": 1,
+        "salutation": "Mr",
+        "firstName": "Vin2",
+        "lastName": "Pat1",
+        "countryId": 93,
+        "countryName": "India",
+        "stateName": "Delhi",
+        "cityName": "South Delhi",
+        "postalCode": "110055",
+        "stateId": 5552,
+        "cityId": 136794,
+        "postalCodeId": 173977,
+        "addressLine1": "test2",
+        "addressLine2": "test1",
+        "landmark": "testL",
+        "cEmail": "test@test.com",
+        "cPhone": "12345678",
+        "communicationType": "Email",
+        "isPrimary": true
+      },
+      
+    {
+        "id": 3,
+        "clientId": 1,
+        "salutation": "Mr",
+        "firstName": "Vin2",
+        "lastName": "Pat1",
+        "countryId": 93,
+        "countryName": "India",
+        "stateName": "Delhi",
+        "cityName": "South Delhi",
+        "postalCode": "110055",
+        "stateId": 5552,
+        "cityId": 136794,
+        "postalCodeId": 173977,
+        "addressLine1": "test2",
+        "addressLine2": "test1",
+        "landmark": "testL",
+        "cEmail": "test@test.com",
+        "cPhone": "12345678",
+        "communicationType": "Phone",
+        "isPrimary": true
+      }
+  ]
+}

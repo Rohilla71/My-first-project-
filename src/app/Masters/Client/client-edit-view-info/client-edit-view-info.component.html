@@ -132,7 +132,7 @@
                         <div class="col-4 col-md-4 col-lg-4">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Customer Mobile</mat-label>
-                                <input matInput formControlName="mobile">
+                                <input type="number" matInput formControlName="mobile">
                             </mat-form-field>
 
                         </div>
@@ -142,7 +142,7 @@
                         <div class="col-4 col-md-4 col-lg-4">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Customer Phone</mat-label>
-                                <input matInput formControlName="phone">
+                                <input matInput type="number" formControlName="phone">
                             </mat-form-field>
 
                         </div>
@@ -262,7 +262,10 @@
             <app-client-document-upload [cid] ="customerID"></app-client-document-upload>
         </ng-template> </mat-tab>
     <!-- <mat-tab label="Address"> Address </mat-tab> -->
-    <mat-tab label="Contact Persons"> Contact Persons </mat-tab>
+    <mat-tab label="Contact Persons">   <ng-template matTabContent>
+        <app-client-contact-details [cid] ="customerID"></app-client-contact-details>
+    </ng-template>
+    </mat-tab>
     <mat-tab label="Supplier"> Supplier </mat-tab>
     <mat-tab label="Settings"> Settings </mat-tab>
     <mat-tab label="RateCard"> Rate Card </mat-tab>

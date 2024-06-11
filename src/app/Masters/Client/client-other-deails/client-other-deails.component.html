@@ -4,14 +4,14 @@
             <legend>Other Details</legend>
             <form class="form-margin" [formGroup]="form" enctype="multipart/form-data">
                 <div class="row g-3">
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Display Name</mat-label>
                             <input matInput formControlName="displayName">
 
                         </mat-form-field>
                     </div>
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Currency</mat-label>
                             <mat-select formControlName="currencyId" required>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Tax Treatment</mat-label>
                             <mat-select formControlName="taxTreatmentId" required>
@@ -35,7 +35,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>PAN</mat-label>
                             <input matInput formControlName="panno">
@@ -48,15 +48,15 @@
 
                 <div class="row g-3">
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Account Number</mat-label>
-                            <input matInput formControlName="accountNo">
+                            <input type="number" matInput formControlName="accountNo">
                         </mat-form-field>
 
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Account Reference</mat-label>
                             <input matInput formControlName="accountReference">
@@ -67,7 +67,7 @@
 
                 <div class="row g-3">
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>Tax Preference</mat-label>
                             <mat-select formControlName="taxPreferenceId" required>
@@ -78,7 +78,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div *ngIf="isLogoPath">
                             <img src="{{userImage}}" width="70" height="70" class="iamge-class" alt="">
                         </div>
@@ -93,7 +93,7 @@
 
                 <div class="row g-3">
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <!-- <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Terms Conditions</mat-label>
                         <input matInput formControlName="termsConditions">
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <!-- <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Disclaimer</mat-label>
                         <input matInput formControlName="disclaimer">

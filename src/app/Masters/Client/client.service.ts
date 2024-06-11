@@ -10,7 +10,7 @@ import { ClientListResponse } from 'src/app/Interfaces/ClientList';
   providedIn: 'root',
 })
 export class ClientService {
-
+  clientId;
   baseUrl = environment.APiUrl;
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -119,6 +119,38 @@ export class ClientService {
   }
   getActiveLanguageList() {
     return this.http.get(`${environment.APiUrl}Master/GetActiveLanguageList`)
+  }
+
+  getContactDetailsList(id) {
+   //return this.http.get(`${environment.APiUrl}Client/GetContactDetailsByClientId?clientId=` + id)
+    return this.http.get('./assets/JSON/getcontactpersonDetails.json')
+  }
+
+  getSalutationList() {
+    return this.http.get(`./assets/JSON/getSalutationList.json`)
+  }
+  getCommunicationList() {
+    return this.http.get(`./assets/JSON/getCommunicationTypeList.json`)
+  }
+  
+  createContact(data) {
+    return this.http.get('./assets/JSON/PostContactDetails.json')
+    // return this.http.post<any>(`${environment.APiUrl}Client/PostContactDetails`, data).pipe(
+    //   catchError(err => {
+    //     console.log(err)
+    //     return throwError(() => err)
+    //   })
+    // )
+  }
+
+  updateContact(id, data) {
+    return this.http.get('./assets/JSON/PostContactDetails.json')
+    // return this.http.post<any>(`${environment.APiUrl}Client/UpdateContactDetails`, data).pipe(
+    //   catchError(err => {
+    //     console.log(err)
+    //     return throwError(() => err)
+    //   })
+    // )
   }
 
 }

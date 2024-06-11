@@ -9,7 +9,7 @@
             <fieldset class="fieldset-class">
                 <legend>File Upload Section</legend>
                 <div class="row g-3">
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>File Description </mat-label>
                             <textarea cdkTextareaAutosize [(ngModel)]="description" cdkAutosizeMinRows="1"
@@ -17,7 +17,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="file-upload">
                             <input type="file" class="file-upload" (change)="fileUpload($event)">
                         </div>

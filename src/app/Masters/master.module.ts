@@ -30,6 +30,8 @@ import { ClientBasicDetailsComponent } from './Client/client-basic-details/clien
 import { ClientEditViewInfoComponent } from './Client/client-edit-view-info/client-edit-view-info.component';
 import { ClientOtherDeailsComponent } from './Client/client-other-deails/client-other-deails.component';
 import { ClientDocumentUploadComponent } from './Client/client-document-upload/client-document-upload.component';
+import { ClientContactDetailsComponent } from './Client/client-contact-details/client-contact-details.component';
+import { ClientEditViewContactDetailsComponent } from './Client/client-edit-view-contact-details/client-edit-view-contact-details.component';
 @NgModule({
   declarations: [
     ClientListComponent,
@@ -57,7 +59,9 @@ import { ClientDocumentUploadComponent } from './Client/client-document-upload/c
     ClientBasicDetailsComponent,
     ClientEditViewInfoComponent,
     ClientOtherDeailsComponent,
-    ClientDocumentUploadComponent
+    ClientDocumentUploadComponent,
+    ClientContactDetailsComponent,
+    ClientEditViewContactDetailsComponent
   ],
   imports: [
     CommonModule,

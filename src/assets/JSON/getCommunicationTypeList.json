@@ -1,0 +1,15 @@
+{
+    "errors": [],
+    "message": "",
+    "success": true,
+    "data": [
+        {
+            "name": "Email",
+            "id": "Email"
+        },
+        {
+            "name": "Phone",
+            "id": "Phone"
+        }
+    ]
+}
