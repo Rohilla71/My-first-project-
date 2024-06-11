@@ -16,13 +16,20 @@
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Name</mat-label>
-                                <input matInput formControlName="name" />
+                                <input matInput formControlName="name" 
+                                (keypress)="validateName()"/>
+                                <mat-error *ngIf="invoiceTermForm.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Description</mat-label>
                                 <input matInput formControlName="description" />
+                                <mat-error *ngIf="invoiceTermForm.get('description').hasError('maxlength')">
+                                    Description must not exceed 200 characters
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>

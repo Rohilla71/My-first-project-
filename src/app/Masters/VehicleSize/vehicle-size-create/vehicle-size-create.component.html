@@ -16,9 +16,9 @@
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Name</mat-label>
-                                <input matInput formControlName="name" />
+                                <input matInput formControlName="name" (keypress)="validateName()" />
                                 <mat-error *ngIf="vehicleSizeForm.get('name').hasError('required')">
-                                    Required
+                                    Name is required
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -26,6 +26,9 @@
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Description</mat-label>
                                 <input matInput formControlName="description" />
+                                <mat-error *ngIf="vehicleSizeForm.get('description').hasError('maxlength')">
+                                    Description must not exceed 500 characters
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -34,12 +37,18 @@
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Size(sqft)</mat-label>
                                 <input matInput formControlName="sizeInSqft" />
+                                <mat-error *ngIf="vehicleSizeForm.get('sizeInSqft').hasError('pattern')">
+                                    Please enter numbers only
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Length</mat-label>
                                 <input matInput formControlName="length" />
+                                <mat-error *ngIf="vehicleSizeForm.get('length').hasError('pattern')">
+                                    Please enter numbers only
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -48,12 +57,18 @@
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Height</mat-label>
                                 <input matInput formControlName="height" />
+                                <mat-error *ngIf="vehicleSizeForm.get('height').hasError('pattern')">
+                                    Please enter numbers only
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Width</mat-label>
                                 <input matInput formControlName="width" />
+                                <mat-error *ngIf="vehicleSizeForm.get('width').hasError('pattern')">
+                                    Please enter numbers only
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>

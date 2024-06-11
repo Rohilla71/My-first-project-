@@ -49,36 +49,34 @@ export class PostalCodeCreateComponent {
     public snackBarService: SnackBarService,
     public _sharedService: SharedService
   ) {
+    
     this.GetCountryList();
 
     this.postalcodeData = data?.data;
     if (!this.postalcodeData) {
       this.form = this._formBuilder.group({
         id: [0],
-        countryId: [''],
-        stateId: [''],
+        countryId: ['', Validators.required],
+        stateId: ['', Validators.required],
         cityId: ['', Validators.required],
         postalCode: ['', Validators.required],
         latitude: [],
         longitude: [''],
-        isTaxApplicable: [false],
-        taxRate: [''],
+        isTaxApplicable: [true],
+        taxRate: ['', Validators.maxLength(2)],
         isActive: [true],
-        description: [''],
-        // lastActionBy: [''],
-        // lastActionOn: [''],
+        description: ['', Validators.maxLength(500)],
       });
 
       this.Reset();
+      this.form.controls['id'].setValue(0);
+
     } else {
-      this.selectedCountry = this.postalcodeData?.countryName;
-      this.selectedState = this.postalcodeData?.stateName;
-      this.selectedCity = this.postalcodeData?.cityName;
 
       if (this.postalcodeData !== undefined) {
         this.GetStateByCountryId(this.postalcodeData.countryId);
         this.GetCityByStateId(this.postalcodeData.stateId);
-        this.getPostalCodeByCityId(Number(this.postalcodeData.postalCode));
+        this.getPostalCodeByCityId(this.postalcodeData.cityId);
 
         this.form = this._formBuilder.group({
           id: this.postalcodeData.id,
@@ -92,57 +90,20 @@ export class PostalCodeCreateComponent {
           taxRate: this.postalcodeData.taxRate,
           isActive: this.postalcodeData.isActive,
           description: this.postalcodeData.description,
-          // lastActionBy: this.postalcodeData.lastActionBy,
-          // lastActionOn: this.postalcodeData.lastActionOn,
         });
       }
     }
+
   }
 
   ngOnInit(): void {
-    //this.userId = Number(localStorage.getItem('userId'));
-  }
-
-  filtercountry(name: any) {
-    let arr = this.countryService.countries.filter(
-      (country) => country.name.toLowerCase().indexOf(name.toLowerCase()) === 0
-    );
-
-    if (arr.length == 1) {
-      this.form.controls['countryId'].setValue(arr[0].id);
-      this.GetStateByCountryId(arr[0].id);
-    }
-    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
-  }
-
-  filterState(name: any) {
-    let arr = this.cityService.states.filter(
-      (item) => item.name.toLowerCase().indexOf(name.toLowerCase()) === 0
-    );
-
-    if (arr.length == 1) {
-      this.form.controls['stateId'].setValue(arr[0].id);
-      this.GetCityByStateId(arr[0].id);
-    }
-    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
-  }
-
-  filterCity(name: any) {
-    let arr = this.cityService.cities.filter(
-      (item) => item.name.toLowerCase().indexOf(name.toLowerCase()) === 0
-    );
-
-    if (arr.length == 1) {
-      this.form.controls['cityId'].setValue(arr[0].id);
-    }
-    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
   }
 
   SubmitForm() {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       const payload = {
-        countryId: this.form.value.countryId,
-        stateId: this.form.value.stateId,
+        id :this.form.value.id,
         cityId: this.form.value.cityId,
         postalCode: this.form.value.postalCode.toString(),
         latitude: this.form.value.latitude,
@@ -228,37 +189,7 @@ export class PostalCodeCreateComponent {
       };
   }
 
-  cityChange(id: any) {
-    this.form.controls['cityId'].setValue(id);
-  }
-  onCountryChange(event: any) {
-    this.cityService.GetStateByCountryId(event.id).subscribe((res: any) => {
-      if (res.success === true) {
-        this.stateList = res.data;
-      }
-    }),
-      (error) => {
-        this.snackBarService.openSnackbar(error.message, 'error');
-      };
-  }
-
-  onStateChange(event: any) {
-    this.cityService.GetCityByStateId(event.id).subscribe((res: any) => {
-      if (res.success === true) {
-        this.cityList = res.data;
-      }
-    }),
-      (error) => {
-        this.snackBarService.openSnackbar(error.message, 'error');
-      };
-  }
-
-  onCityChange(event: any) {
-    this.getPostalCodeByCityId(Number(event.id));
-  }
-
   getPostalCodeByCityId(id: any) {
-    debugger
     this._sharedService.getPostalCodeByCityId(id).subscribe((res: any) => {
       if (res.success) {
         this.postCodeList = res.data;
@@ -266,7 +197,31 @@ export class PostalCodeCreateComponent {
     });
   }
 
-  onPostalCodeChange(event: any) {
-    console.log(event);
+  // cityChange(id: any) {
+  //   this.form.controls['cityId'].setValue(id);
+  // }
+  onCountryChange(event: any) {
+    this.stateList = [];
+    this.form.controls['stateId'].reset();
+    this.form.controls['cityId'].reset();
+    this.form.controls['postalCode'].reset();
+    this.GetStateByCountryId(event.id);
   }
+
+  onStateChange(event: any) {
+    this.cityList = [];
+    this.form.controls['cityId'].reset();
+    this.form.controls['postalCode'].reset();
+    this.GetCityByStateId(event.id);
+  }
+
+  onCityChange(event: any) {
+    this.postCodeList = [];
+    this.form.controls['postalCode'].reset();
+    this.getPostalCodeByCityId(Number(event?.id));
+  }
+
+  
+
+  
 }

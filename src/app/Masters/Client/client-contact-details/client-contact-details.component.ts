@@ -35,8 +35,11 @@ export class ClientContactDetailsComponent {
   constructor(private service: ClientService, public dialog: MatDialog, private snackBar: SnackBarService) {}
 
   ngOnInit() {
-    this.service.clientId = this.cid;
+    this.service.customerId = this.cid;
     this.getContactDetailsList()
+    this.service.contactSubmitEvent.subscribe(p=> {
+      this.getContactDetailsList()
+    })
       }
 
       

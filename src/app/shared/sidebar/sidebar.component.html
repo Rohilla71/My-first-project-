@@ -17,7 +17,7 @@
             @for ( submenu of item.submenuDetails; track submenu) {
               <!-- @if(submenu.isActive) { -->
               
-                <a mat-list-item routerLink="{{submenu.navigateUrl}}"><mat-icon>{{submenu.iconClass}}</mat-icon>{{submenu.name}}</a>
+                <a mat-list-item routerLinkActive="active" routerLink="{{submenu.navigateUrl}}"><mat-icon>{{submenu.iconClass}}</mat-icon>{{submenu.name}}</a>
               <!-- } -->
              
             }

@@ -5,15 +5,15 @@
     "data": [
         {
             "name": "Mr",
-            "id": "Mr"
+            "id": 1
         },
         {
             "name": "Mrs",
-            "id": "Mrs"
+            "id": 2
         },
         {
             "name": "Ms",
-            "id": "Ms"
+            "id": 3
         }
     ]
 }

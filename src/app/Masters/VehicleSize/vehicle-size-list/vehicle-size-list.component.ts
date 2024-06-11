@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -30,6 +30,8 @@ export class VehicleSizeListComponent {
     'lastActionOn',
     'actions',
   ];
+
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -75,6 +77,7 @@ export class VehicleSizeListComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllVehicleSizeList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -87,6 +90,7 @@ export class VehicleSizeListComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllVehicleSizeList();
+      this.input.nativeElement.value = "";
     });
   }
 

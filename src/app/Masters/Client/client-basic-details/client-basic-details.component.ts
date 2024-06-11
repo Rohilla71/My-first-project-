@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,38 +16,41 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 @Component({
   selector: 'app-client-basic-details',
   templateUrl: './client-basic-details.component.html',
-  styleUrls: ['./client-basic-details.component.scss']
+  styleUrls: ['./client-basic-details.component.scss'],
 })
 export class ClientBasicDetailsComponent implements OnInit {
   countryCtrl: FormControl<any>;
   filteredCountry: Observable<unknown>;
-  PostalCodeList = []
+  PostalCodeList = [];
   selectedCountry;
   form: FormGroup;
   inputData: any;
   checked = false;
   color: ThemePalette = 'accent';
   public title = 'New Customer';
-  public isHidden = true
-  public countryList = []
-  public stateList = []
-  public cityList = []
-  public currencyArray = []
-  public languageArray = []
-  public postCodeArray = []
-  public custTypeList = []
+  public isHidden = true;
+  public countryList = [];
+  public stateList = [];
+  public cityList = [];
+  public currencyArray = [];
+  public languageArray = [];
+  public postCodeArray = [];
+  public custTypeList = [];
 
-  constructor(private snackBarService: SnackBarService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router,
+  constructor(
+    private snackBarService: SnackBarService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router,
     private fb: FormBuilder,
     public createCustomerService: ClientService,
-    public dialogRef: MatDialogRef<ClientBasicDetailsComponent>,) {
+    public dialogRef: MatDialogRef<ClientBasicDetailsComponent>
+  ) {
     this.form = this.fb.group({
       customerType: ['', Validators.required],
       companyName: ['', Validators.required],
       customerEmail: ['', [Validators.required, Validators.email]],
       customerPhone: [''],
-      customerMobile: ['', Validators.required],
+      customerMobile: ['',[Validators.required]],
       language: [''],
       country: ['', Validators.required],
       state: ['', Validators.required],
@@ -50,33 +58,40 @@ export class ClientBasicDetailsComponent implements OnInit {
       postalCode: ['', Validators.required],
       address1: ['', Validators.required],
       address2: [''],
-      landmark: ['']
+      landmark: [''],
     });
+
+    this.Reset();
   }
   ngOnInit(): void {
-    this.getCustomerTypelist()
-    this.getcountrylist()
-    this.getLanguagelist()
+    this.getCustomerTypelist();
+    this.getcountrylist();
+    this.getLanguagelist();
   }
 
   SubmitForm() {
-    // this.router.navigateByUrl('masters/client-info?cid='+3+''); 
-    // if (this.form.valid) {
-    this.createCustomerService.createNewCustomer(this.form.value).subscribe(p => {
-      if (p) {
-        this.snackBarService.showSnackbarTopPosition('Saved Successfully', 'Success')
-        this.close();
-        this.router.navigateByUrl('masters/client-info?cid=' + p.data.id + '');
+    this.form.markAllAsTouched();
 
-      }
-    }),
-      error => {
+    this.form.value.customerPhone = this.form.value.customerPhone?.toString();
+    this.form.value.customerMobile = this.form.value.customerMobile?.toString();
+
+    this.createCustomerService
+      .createNewCustomer(this.form.value)
+      .subscribe((p) => {
+        if (p) {
+          this.snackBarService.showSnackbarTopPosition(
+            'Saved Successfully',
+            'Success'
+          );
+          this.close();
+          this.router.navigateByUrl(
+            'masters/client-info?cid=' + p.data.id + ''
+          );
+        }
+      }),
+      (error) => {
         this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
-      }
-    // }
-    // else {
-    //   this.form.markAllAsTouched();
-    // }
+      };
   }
 
   Reset() {
@@ -90,66 +105,77 @@ export class ClientBasicDetailsComponent implements OnInit {
   getCustomerTypelist() {
     this.createCustomerService.getCustomerTypeList().subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.custTypeList = list.data
-      }
-    })
+        this.custTypeList = list.data;
+      },
+    });
   }
   getcountrylist() {
     this.createCustomerService.getCountry().subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.countryList = list.data
-      }
-    })
+        this.countryList = list.data;
+      },
+    });
   }
-
 
   getLanguagelist() {
     this.createCustomerService.getLanguage().subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.languageArray = list.data
-      }
-    })
+        this.languageArray = list.data;
+      },
+    });
   }
 
-  countrySelect(event) {
-    this.createCustomerService.getState(event.value).subscribe({
+  countrySelect(event) {debugger
+    this.stateList = [];
+    this.form.controls['state'].reset();
+    this.form.controls['city'].reset();
+    this.form.controls['postalCode'].reset();
+
+    this.createCustomerService.getState(event.id).subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.stateList = list.data
-      }
-    })
+        this.stateList = list.data;
+      },
+    });
   }
 
   stateSelect(event) {
-    this.createCustomerService.getCity(event.value).subscribe({
+    this.cityList = [];
+    this.form.controls['city'].reset();
+    this.form.controls['postalCode'].reset();
+
+    this.createCustomerService.getCity(event.id).subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.cityList = list.data
-      }
-    })
+        this.cityList = list.data;
+      },
+    });
   }
 
   citySelect(event) {
-    this.createCustomerService.getPostCode(event.value).subscribe({
+    this.PostalCodeList = [];
+    this.form.controls['postalCode'].reset();
+    
+    this.createCustomerService.getPostCode(event.id).subscribe({
       error: (error) => {
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Error') 
-     },
+        this.snackBarService.showSnackbarTopPosition(error.message, 'Error');
+      },
       next: (list: any) => {
-        this.PostalCodeList = list.data
-      }
-    })
+        this.PostalCodeList = list.data;
+      },
+    });
   }
 }

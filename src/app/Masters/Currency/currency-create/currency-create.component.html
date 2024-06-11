@@ -11,19 +11,24 @@
                         <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
                     </div>
                 </div>
-
                 <form [formGroup]="currencyForm">
                     <div class="row g-3">
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Name</mat-label>
-                                <input matInput formControlName="name" />
+                                <input matInput formControlName="name" (keypress)="validateName()"/>
+                                <mat-error *ngIf="currencyForm.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Code</mat-label>
                                 <input matInput formControlName="code" />
+                                <mat-error *ngIf="currencyForm.get('code').hasError('required')">
+                                    Code is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -32,6 +37,9 @@
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Symbol</mat-label>
                                 <input matInput formControlName="symbol" />
+                                <mat-error *ngIf="currencyForm.get('symbol').hasError('required')">
+                                    Symbol is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">

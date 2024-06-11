@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { StateService } from '../state.service';
-import { State, StateList } from '../state.types';
+import { StateList } from '../state.types';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +14,6 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
   styleUrl: './state-list.component.scss',
 })
 export class StateListComponent implements OnInit {
-
   isLoading = true;
   stateList: StateList[] = [];
   dataSource: MatTableDataSource<StateList>;
@@ -31,9 +30,14 @@ export class StateListComponent implements OnInit {
     'lastActionOn',
     'actions',
   ];
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private _stateService: StateService, public dialog: MatDialog, private _snackBarService: SnackBarService) {}
+  constructor(
+    private _stateService: StateService,
+    public dialog: MatDialog,
+    private _snackBarService: SnackBarService
+  ) {}
 
   ngOnInit(): void {
     this.getAllStateList();
@@ -42,7 +46,6 @@ export class StateListComponent implements OnInit {
   getAllStateList(): void {
     this._stateService.GetAllStateList().subscribe((res) => {
       if (res.success) {
-        
         this.isLoading = false;
         this.stateList = res.data;
         this.dataSource = new MatTableDataSource(this.stateList);
@@ -62,10 +65,10 @@ export class StateListComponent implements OnInit {
         // };
       }
     }),
-    error=>{
-      this.isLoading = false;
-      this._snackBarService.openSnackbar(error.message, 'Close');
-    };
+      (error) => {
+        this.isLoading = false;
+        this._snackBarService.openSnackbar(error.message, 'Close');
+      };
   }
 
   applyFilter(event: Event) {
@@ -85,6 +88,7 @@ export class StateListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllStateList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -97,11 +101,11 @@ export class StateListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllStateList();
+      this.input.nativeElement.value = "";
     });
   }
 
   deleteState(stateId: number) {
-    this._stateService.DeleteState(stateId).subscribe((res: any) => {
-    });
+    this._stateService.DeleteState(stateId).subscribe((res: any) => {});
   }
 }

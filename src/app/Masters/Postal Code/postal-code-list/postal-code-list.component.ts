@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,17 +17,18 @@ import {
   switchMap,
 } from 'rxjs';
 
-
 @Component({
   selector: 'app-postal-code-list',
   templateUrl: './postal-code-list.component.html',
   styleUrls: ['./postal-code-list.component.scss'],
 })
 export class PostalCodeListComponent implements OnInit {
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   displayedColumns: string[] = [
     'id',
-    'cityId',
+    'country',
+    'state',
+    'city',
     'postalCode',
     'latitude',
     'longitude',
@@ -41,6 +42,8 @@ export class PostalCodeListComponent implements OnInit {
   ];
 
   isLoading = true;
+
+  @ViewChild('input') input: ElementRef<any>;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -49,14 +52,10 @@ export class PostalCodeListComponent implements OnInit {
 
   resultsLength = 0;
 
-
   constructor(
     public service: PostalCodeService,
-    public dialog: MatDialog
-  ) //private toastr: ToastrService
-  {
-
-  }
+    public dialog: MatDialog //private toastr: ToastrService
+  ) {}
 
   add(): void {
     const dialogRef = this.dialog.open(PostalCodeCreateComponent, {
@@ -65,6 +64,7 @@ export class PostalCodeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.dataBinding();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -77,6 +77,7 @@ export class PostalCodeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.dataBinding();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -132,7 +133,4 @@ export class PostalCodeListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }
-
-

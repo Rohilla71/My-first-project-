@@ -75,53 +75,83 @@
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                                <div class="form-group">
+                                    <ng-select [items]="countryList" bindLabel="name"
+                                        bindValue="id" labelForId="country" [multiple]="false"
+                                        [searchable]="true" clearAllText="Clear" formControlName="country"
+                                        placeholder="Country" (change)="countrySelect($event)">
+                                    </ng-select>
+                                </div>
+                                
+                                <!-- <mat-form-field class="w-100" appearance="outline">
                                     <mat-label>Country</mat-label>
                                     <mat-select formControlName="country" (selectionChange)="countrySelect($event)">
                                         @for (cntry of countryList; track cntry) {
                                         <mat-option [value]="cntry.id">{{cntry.name}}</mat-option>
                                         }
                                     </mat-select>
-                                </mat-form-field>
+                                </mat-form-field> -->
                             </div>
                         </div>
 
                         <div class="row g-3">
 
                             <div class="col-12 col-md-6 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                                <div class="form-group">
+                                    <ng-select [items]="stateList" bindLabel="name" bindValue="id" 
+                                        [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                        formControlName="state" placeholder="State"
+                                        (change)="stateSelect($event)">
+                                    </ng-select>
+                                </div>
+
+                                <!-- <mat-form-field class="w-100" appearance="outline">
                                     <mat-label>State</mat-label>
                                     <mat-select formControlName="state" (selectionChange)="stateSelect($event)">
                                         @for (state of stateList; track state) {
                                         <mat-option [value]="state.id">{{state.name}}</mat-option>
                                         }
                                     </mat-select>
-                                </mat-form-field>
+                                </mat-form-field> -->
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                                <div class="form-group">
+                                    <ng-select [items]="cityList" bindLabel="name" bindValue="id"
+                                        [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                        formControlName="city" placeholder="City"
+                                        (change)="citySelect($event)">
+                                    </ng-select>
+                                </div>
+
+                                <!-- <mat-form-field class="w-100" appearance="outline">
                                     <mat-label>City</mat-label>
                                     <mat-select formControlName="city" (selectionChange)="citySelect($event)">
                                         @for (city of cityList; track city) {
                                         <mat-option [value]="city.id">{{city.name}}</mat-option>
                                         }
                                     </mat-select>
-                                </mat-form-field>
+                                </mat-form-field> -->
                             </div>
                         </div>
 
+                        <br/>
                         <div class="row g-3">
 
-                            <div class="col-12 col-md-6 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                            <div class="col-12 col-md-6 col-lg-6"  >
+                                <ng-select [items]="PostalCodeList" bindLabel="postalCode" bindValue="postalCode"
+                                [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                formControlName="postalCode" placeholder="PostalCode">
+                            </ng-select>
+
+                                <!-- <mat-form-field class="w-100" appearance="outline">
                                     <mat-label>Postal Code</mat-label>
                                     <mat-select formControlName="postalCode">
                                         @for (postCode of PostalCodeList; track postCode) {
                                         <mat-option [value]="postCode.id">{{postCode.postalCode}}</mat-option>
                                         }
                                     </mat-select>
-                                </mat-form-field>
+                                </mat-form-field> -->
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-6">
@@ -158,10 +188,10 @@
                         <div class="row btn-class">
                             <div class="col-12 col-md-12 ">
                                 <div class="d-flex gap-3 btn-class">
-                                    <!-- <button [disabled]="!form.valid" mat-flat-button color="success" class="px-4"
-                                        type="button" (click)="SubmitForm()">Submit</button> -->
-                                        <button mat-flat-button color="success" class="px-4" [disabled]="!form.valid"
+                                    <button [disabled]="!form.valid" mat-flat-button color="primary" class="px-4"
                                         type="button" (click)="SubmitForm()">Submit</button>
+                                        <!-- <button mat-flat-button color="success" class="px-4" 
+                                        type="button" (click)="SubmitForm()">Submit</button> -->
                                 </div>
                             </div>
                         </div>

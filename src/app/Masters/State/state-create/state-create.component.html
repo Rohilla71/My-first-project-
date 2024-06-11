@@ -1,102 +1,103 @@
-<!-- <div class="row g-4"> -->
-    <div class="container ">
-        <div class="col-12 col-xl-12">
-            <br>
-            <mat-card>
-                <mat-card-content>
-                    <div class="row">
-                        <div class="col-11">
-                            <h5 class="mb-3">State Form</h5>
+<div class="container ">
+    <div class="col-12 col-xl-12">
+        <br>
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-11">
+                        <h5 class="mb-3">State Form</h5>
+                    </div>
+                    <div class="col-1 close-button">
+                        <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                    </div>
+                </div>
+
+                <form [formGroup]="stateForm">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" maxlength=100 (keypress)="validateName()" />
+                                <mat-error *ngIf="stateForm.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                            </mat-form-field>
                         </div>
-                        <div class="col-1 close-button">
-                            <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Code</mat-label>
+                                <input matInput formControlName="code" maxlength=10 />
+                                <mat-error *ngIf="stateForm.get('code').hasError('required')">
+                                    Code is required
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
-    
-                    <form [formGroup]="stateForm">
-                        <div class="row g-3">
-                            <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Name</mat-label>
-                                    <input matInput formControlName="name" />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Code</mat-label>
-                                    <input matInput formControlName="code" />
-                                </mat-form-field>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <ng-select [items]="_countryService.countries" bindLabel="name" bindValue="id"
+                                    labelForId="country" [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="countryId" placeholder="Country">
+                                </ng-select>
+                                <mat-error *ngIf="stateForm.get('countryId').hasError('required') && stateForm.get('countryId').touched">
+                                    Name is required
+                                </mat-error>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Country</mat-label>
-                                    <input matInput aria-label="Country" [(ngModel)]="selectedCountry" [matAutocomplete]="auto"
-                                        [formControl]="countryCtrl" required />
-                                        
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let country of filteredCountry | async"
-                                            [value]="country.name"
-                                            (onclick)="GetStateByCountryId(country.id)">
-                                            <span>{{ country.name }} </span>
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                    <mat-icon matSuffix>language</mat-icon>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>GST Code</mat-label>
-                                    <input matInput formControlName="gstCode" />
-                                </mat-form-field>
-                            </div>
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>GST Code</mat-label>
+                                <input matInput formControlName="gstCode" />
+                                <mat-error *ngIf="stateForm.get('gstCode').hasError('maxlength')">
+                                    GstCode must not exceed 2 characters
+                                </mat-error>
+                                <mat-error *ngIf="stateForm.get('gstCode').hasError('pattern')">
+                                    Please enter numbers only
+                                </mat-error>
+                            </mat-form-field>
                         </div>
-    
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Latitude</mat-label>
-                                    <input matInput formControlName="latitude" />
-                                </mat-form-field>
-                            </div>
-    
-                            <div class="col-12 col-md-6">
-                                <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Longitude</mat-label>
-                                    <input matInput formControlName="longitude" />
-                                </mat-form-field>
-                            </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Latitude</mat-label>
+                                <input matInput formControlName="latitude" type="number" maxlength=50 />
+                            </mat-form-field>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <section class="example-section">
-                                    <mat-slide-toggle 
-                                    formControlName="isActive"
-                                    (change)="isactiveChange($event)"
-                                        class="example-margin"
-                                        [color]="color"
-                                        [checked]="checked"
-                                        [disabled]="disabled"
-                                        labelPosition="before">
-                                        IsActive :
-                                    </mat-slide-toggle>
-                                  </section>
-                            </div>
+
+                        <div class="col-12 col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Longitude</mat-label>
+                                <input matInput formControlName="longitude" type="number" maxlength=50 />
+                            </mat-form-field>
                         </div>
-                        <div class="col-12 col-md-12">
-                            <div class="d-flex gap-3 button-container">
-                                <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
-                                    Submit
-                                </button>
-                                <button mat-stroked-button class="px-4" (click)="Reset()">
-                                    Reset
-                                </button>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <section class="example-section">
+                                <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
+                                    class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                                    labelPosition="before">
+                                    IsActive :
+                                </mat-slide-toggle>
+                            </section>
                         </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                            <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                                Submit
+                            </button>
+                            <button mat-stroked-button class="px-4" (click)="Reset()">
+                                Reset
+                            </button>
+                        </mat-dialog-actions>
+
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
-    <!-- </div> -->
+</div>

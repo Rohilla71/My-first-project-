@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DeliveryStatusCreateComponent } from '../delivery-status-create/delivery-status-create.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -35,6 +35,8 @@ export class DeliveryStatusListComponent implements OnInit {
   ];
 
   isLoading = true;
+
+  @ViewChild('input') input: ElementRef<any>;
   dataSource: MatTableDataSource<DeliveryStatusData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -56,6 +58,7 @@ export class DeliveryStatusListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.GetDelieveryStatusList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -68,6 +71,7 @@ export class DeliveryStatusListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.GetDelieveryStatusList();
+      this.input.nativeElement.value = "";
     });
   }
 

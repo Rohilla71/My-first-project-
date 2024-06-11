@@ -20,15 +20,23 @@
                             <div class="col-12 col-md-12 col-lg-6">
                                 <mat-form-field class="w-100" appearance="outline">
                                     <mat-label>Name</mat-label>
-                                    <input matInput formControlName="name">
+                                    <input matInput formControlName="name" maxlength=100 (keypress)="validateName()">
                                     <mat-icon matSuffix>account_circle</mat-icon>
+                                    <mat-error *ngIf="form.get('name').hasError('required')">
+                                        Name is required
+                                    </mat-error>
                                 </mat-form-field>
+                                
                             </div>
+
                             <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field class="w-100" appearance="outline">
+                                <mat-form-field class="w-100" appearance="outline" maxlength=200>
                                     <mat-label>Description</mat-label>
                                     <input matInput formControlName="description">
                                     <mat-icon matSuffix>sms</mat-icon>
+                                    <mat-error *ngIf="form.get('description').hasError('maxlength')">
+                                        Description must not exceed 200 characters
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="col-12 col-md-12 col-lg-6">
@@ -36,6 +44,9 @@
                                     <mat-label>Sequence</mat-label>
                                     <input matInput formControlName="sequence">
                                     <mat-icon matSuffix>phone</mat-icon>
+                                    <mat-error *ngIf="form.get('sequence').hasError('required')">
+                                        Sequence is required
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
     
@@ -57,11 +68,15 @@
     
     
                             <div class="col-12 col-md-12">
-                                <div class="d-flex gap-3">
-                                    <button mat-flat-button class="px-4 btn-green" type="button"
-                                        (click)="SubmitForm()">Submit</button>
-                                    <button mat-stroked-button class="px-4" (click)="Reset()">Reset</button>
-                                </div>
+                                <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                                    <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                                        Submit
+                                    </button>
+                                    <button mat-stroked-button class="px-4" (click)="Reset()">
+                                        Reset
+                                    </button>
+                                </mat-dialog-actions>
+                                
                             </div>
                         </div>
                     </form>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject, catchError, throwError } from 'rxjs';
+import { ReplaySubject, Subject, catchError, throwError } from 'rxjs';
 import { User } from 'src/app/Interfaces/User';
 import { environment } from 'src/environments/environment';
 import { ClientListResponse } from 'src/app/Interfaces/ClientList';
@@ -10,7 +10,8 @@ import { ClientListResponse } from 'src/app/Interfaces/ClientList';
   providedIn: 'root',
 })
 export class ClientService {
-  clientId;
+  customerId;
+  public contactSubmitEvent = new Subject<any>
   baseUrl = environment.APiUrl;
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -135,7 +136,7 @@ export class ClientService {
   
   createContact(data) {
     return this.http.get('./assets/JSON/PostContactDetails.json')
-    // return this.http.post<any>(`${environment.APiUrl}Client/PostContactDetails`, data).pipe(
+    // return this.http.post<any>(`${environment.APiUrl}Client/CreateContactDetail`, data).pipe(
     //   catchError(err => {
     //     console.log(err)
     //     return throwError(() => err)

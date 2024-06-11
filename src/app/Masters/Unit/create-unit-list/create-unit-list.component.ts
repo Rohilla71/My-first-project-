@@ -29,8 +29,9 @@ export class CreateUnitListComponent {
     if (!this.CData) {
       this.form = this.fb.group({
         id: 0,
-        name: ['', Validators.required],
-        description: ['', Validators.required],
+        name: ['',
+          Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+        description: ['', Validators.maxLength(200)],
         isActive: [true],
         lastActionBy: [''],
         lastActionOn: [''],
@@ -39,7 +40,8 @@ export class CreateUnitListComponent {
       this.title = 'Edit Unit';
       this.form = this.fb.group({
         id: this.CData.id,
-        name: [this.CData.name, Validators.required],
+        name: [this.CData.name, 
+          Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
         description: [this.CData.description, Validators.required],
         isActive: [this.CData.isActive],
         lastActionBy: [{ value: this.CData.lastActionBy }],
@@ -48,6 +50,11 @@ export class CreateUnitListComponent {
     }
   }
 
+  validateName(){
+    this.form.controls['name'].markAsTouched();
+  }
+
+  
   SubmitForm() {
     if (this.form.valid) {
       if (this.form.value.id == 0) {

@@ -20,7 +20,7 @@
                                 <div class="col-12 col-md-4 col-lg-4">
                                     <mat-form-field class="w-100" appearance="outline">
                                         <mat-label>Salutation</mat-label>
-                                        <mat-select formControlName="salutation" required>
+                                        <mat-select formControlName="salutationId" required>
                                             @for (sal of salutationList; track sal) {
                                             <mat-option [value]="sal.id">{{sal.name}}</mat-option>
                                             }
@@ -62,7 +62,7 @@
                                 <div class="col-12 col-md-4 col-lg-4">
                                     <mat-form-field class="w-100" appearance="outline">
                                         <mat-label>Communication Type</mat-label>
-                                        <mat-select formControlName="communicationType" required>
+                                        <mat-select formControlName="communicationTypeId" required>
                                             @for (sal of commTypeList; track sal) {
                                             <mat-option [value]="sal.id">{{sal.name}}</mat-option>
                                             }
@@ -181,10 +181,10 @@
                             <div class="row btn-class">
                                 <div class="col-12 col-md-12 ">
                                     <div class="d-flex gap-3 btn-class">
-                                        <!-- <button [disabled]="!form.valid" mat-flat-button color="success" class="px-4"
-                                            type="button" (click)="SubmitForm()">Submit</button> -->
-                                            <button mat-flat-button color="success" class="px-4"
+                                        <button [disabled]="!form.valid" mat-flat-button color="primary" class="px-4"
                                             type="button" (click)="SubmitForm()">Submit</button>
+                                            <!-- <button mat-flat-button color="success" class="px-4"
+                                            type="button" (click)="SubmitForm()">Submit</button> -->
                                     </div>
                                 </div>
                             </div>

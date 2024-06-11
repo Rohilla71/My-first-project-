@@ -12,82 +12,44 @@
                         <mat-icon matSuffix type="button" (click)="close()">cancel</mat-icon>
                     </div>
                 </div>
-
                 <form [formGroup]="form">
                     <div class="row g-3">
                         <div class="col-12 col-md-12 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Name</mat-label>
-                                <input matInput formControlName="name">
+                                <input matInput formControlName="name" maxlength="100" (keypress)="validateName()">
                                 <mat-icon matSuffix>account_circle</mat-icon>
+                                <mat-error *ngIf="form.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                                <mat-error *ngIf="form.get('name').hasError('pattern')">
+                                    Number is not allowed
+                                </mat-error>
                             </mat-form-field>
                         </div>
-
                         <div class="col-12 col-md-12 col-lg-6">
-                            <!-- <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Country</mat-label>
-                                    <mat-select formControlName="countryId" [(ngModel)]="selectedCountry" >
-                                        <mat-option>None</mat-option>
-                                        <mat-option *ngFor="let item of service2.countries"
-                                            [value]="item.id">{{item.name}}</mat-option>
-                                    </mat-select>
-                                    <mat-icon matSuffix>language</mat-icon>
-                                </mat-form-field> -->
-
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Country</mat-label>
-                                <input matInput aria-label="Country" [(ngModel)]="selectedCountry" [matAutocomplete]="autoC"
-                                    [formControl]="countryCtrl" required (click)="loadCountry()"/>
-                                    
-                                <mat-autocomplete #autoC="matAutocomplete">
-                                    <mat-option *ngFor="let country of filteredCountry | async"
-                                        [value]="country.name" 
-                                        (onclick)="GetStateByCountryId(country.id)">
-                                        <span>{{ country.name }} </span>
-                                    </mat-option>
-                                </mat-autocomplete>
-                                <mat-icon matSuffix>language</mat-icon>
-                            </mat-form-field>
+                            <div class="form-group">
+                                <ng-select [items]="countryService.countries" bindLabel="name" bindValue="id"
+                                    labelForId="country" [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="countryId" placeholder="Country"
+                                    (change)="onCountryChange($event)">
+                                </ng-select>
+                                <mat-error *ngIf="form.get('countryId').hasError('required') && form.get('countryId').touched">
+                                    Please select country
+                                </mat-error>
+                            </div>
                         </div>
-
                         <div class="col-12 col-md-12 col-lg-6">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>State</mat-label>
-                                <input matInput aria-label="State"  [(ngModel)]="selectedState" [matAutocomplete]="auto1"
-                                    [formControl]="stateCtrl" required />
-                                    
-                                <mat-autocomplete #auto1="matAutocomplete">
-                                    <mat-option *ngFor="let item of filteredState | async"
-                                        [value]="item.name" 
-                                        (onclick)="stateChange(item.id)">
-                                        <span>{{ item.name }} </span>
-                                    </mat-option>
-                                </mat-autocomplete>
-                                <mat-icon matSuffix>business</mat-icon>
-                            </mat-form-field>
-
-                            <!-- <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>State</mat-label>
-                                <mat-select [(ngModel)]="selectedState" formControlName="stateId">
-                                    <mat-option>None</mat-option>
-                                    <mat-option *ngFor="let item of service.states" [value]="item.id"
-                                        (onchange)="stateChange(item.id)">{{item.name}}</mat-option>
-                                </mat-select>
-                                <mat-icon matSuffix>filter_hdr</mat-icon>
-                            </mat-form-field> -->
+                            <div class="form-group">
+                                <ng-select [items]="cityService.states" bindLabel="name" bindValue="id"
+                                    [multiple]="false" [searchable]="true" clearAllText="Clear"
+                                    formControlName="stateId" placeholder="State">
+                                </ng-select>
+                                <mat-error *ngIf="form.get('stateId').hasError('required') && form.get('stateId').touched">
+                                    Please select state
+                                </mat-error>
+                            </div>
                         </div>
-
-                        <!-- <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>isActive</mat-label>
-                                    <mat-select formControlName="isActive">
-                                        <mat-option [value]="true">True</mat-option>
-                                        <mat-option [value]="false">False</mat-option>
-                                    </mat-select>
-                                    <mat-icon matSuffix>check_circle_outline</mat-icon>
-                                </mat-form-field>
-                            </div> -->
-
                         <div class="col-12 col-md-12 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Latitude</mat-label>
@@ -105,11 +67,6 @@
                         </div>
 
                         <div class="col-12 col-md-12 col-lg-6">
-                            <!-- <label>isActive: </label> -->
-                            <!-- <mat-radio-group formControlName="isActive">
-                                    <mat-radio-button value="true">True</mat-radio-button>
-                                    <mat-radio-button value="false">False</mat-radio-button>
-                                </mat-radio-group> -->
                             <section class="example-section">
                                 <mat-slide-toggle formControlName="isActive" (change)="isactiveChange($event)"
                                     class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
@@ -118,26 +75,15 @@
                                 </mat-slide-toggle>
                             </section>
                         </div>
-
-                        <!-- <div class="col-12 col-md-12 col-lg-6">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>isActive</mat-label>
-                                    <mat-select formControlName="isActive">
-                                        <mat-option [value]="true">True</mat-option>
-                                        <mat-option [value]="false">False</mat-option>
-                                    </mat-select>
-                                    <mat-icon matSuffix>check_circle_outline</mat-icon>
-                                </mat-form-field>
-                            </div> -->
-
-
-
-                        <div class="col-12 col-md-12 col-lg-6">
-                            <div class="d-flex gap-3">
-                                <button mat-flat-button class="px-4 btn-green" type="button"
-                                    (click)="SubmitForm()">Submit</button>
-                                <button mat-stroked-button class="px-4" (click)="Reset()">Reset</button>
-                            </div>
+                        <div class="col-12 col-md-12 col-lg-12">
+                            <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
+                                <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
+                                    Submit
+                                </button>
+                                <button mat-stroked-button class="px-4" (click)="Reset()">
+                                    Reset
+                                </button>
+                            </mat-dialog-actions>
                         </div>
                     </div>
                 </form>
@@ -145,4 +91,3 @@
         </mat-card>
     </div>
 </div>
-<!-- </div> -->

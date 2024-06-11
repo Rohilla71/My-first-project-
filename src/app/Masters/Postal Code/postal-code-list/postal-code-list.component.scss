@@ -74,3 +74,12 @@
     min-width: 165px !important;
   }
   
+  .mat-column-postalCode, .mat-column-taxRate{
+    max-width: 165px !important;
+    min-width: 165px !important;
+  }
+
+  .mat-column-isTaxApplicable{
+    max-width: 200px !important;
+    min-width: 200px !important;
+  }

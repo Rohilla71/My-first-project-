@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -25,6 +25,8 @@ export class DeliveryTypeListComponent implements OnInit {
     'lastActionOn',
     'actions',
   ];
+
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -68,14 +70,14 @@ export class DeliveryTypeListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllDelivertTypeList();
+      this.input.nativeElement.value = '';
     });
   }
 
   deleteDeliveryType(deliveryType: number) {
     this._deliveryTypeService
       .DeleteDeliveryType(deliveryType)
-      .subscribe((res: any) => {
-      });
+      .subscribe((res: any) => {});
   }
 
   updateDeliveryType(delivery: DeliveryTypeList) {
@@ -87,6 +89,7 @@ export class DeliveryTypeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllDelivertTypeList();
+      this.input.nativeElement.value = '';
     });
   }
 

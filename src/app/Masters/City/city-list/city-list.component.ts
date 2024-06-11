@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -36,6 +36,8 @@ export interface CityData {
   styleUrl: './city-list.component.scss',
 })
 export class CityListComponent implements OnInit {
+  
+  
   ngOnInit(): void { }
 
   displayedColumns: string[] = [
@@ -58,6 +60,7 @@ export class CityListComponent implements OnInit {
   isLoadingResults = true;
   isRateLimitReached = false;
 
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -74,6 +77,7 @@ export class CityListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.dataBinding();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -85,6 +89,7 @@ export class CityListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.dataBinding();
+      this.input.nativeElement.value = "";
     });
   }
 

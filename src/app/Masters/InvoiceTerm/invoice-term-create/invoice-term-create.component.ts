@@ -30,10 +30,11 @@ export class InvoiceTermCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.invoiceTermForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+      description: ['', Validators.maxLength(200)],
       isActive: [true, Validators.required],
     });
+
     this.userId = Number(localStorage.getItem('userId'));
     if (this.invoiceTermData !== undefined) {
       this.invoiceTermForm.patchValue({
@@ -42,6 +43,10 @@ export class InvoiceTermCreateComponent implements OnInit {
         isActive: this.invoiceTermData.isactive,
       });
     }
+  }
+
+  validateName(){
+    this.invoiceTermForm.controls['name'].markAsTouched();
   }
 
   SubmitForm() {

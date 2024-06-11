@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { ClientService } from '../client.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-client-edit-view-contact-details',
@@ -36,8 +37,9 @@ export class ClientEditViewContactDetailsComponent implements OnInit {
     //ask rahul what is clientid and id
     if (!this.CData) {
       this.form = this.fb.group({
-        clientId: +this.service.clientId,
-        salutation: ['', Validators.required],
+        id: 0,
+        customerId: +this.service.customerId,
+        salutationId: [null, Validators.required],
         firstName: ['', Validators.required],
         lastName: [''],
         addressLine1: ['', Validators.required],
@@ -50,7 +52,7 @@ export class ClientEditViewContactDetailsComponent implements OnInit {
         cEmail: ['', [Validators.required, Validators.email]],
         isPrimary: [true, Validators.required],
         cPhone: ['', Validators.required],
-        communicationType: ['']
+        communicationTypeId: [null]
       });
     }
     else {
@@ -65,10 +67,12 @@ export class ClientEditViewContactDetailsComponent implements OnInit {
       if (this.CData.cityId) {
         this.citySelect({ value: this.CData.cityId })
       }
+      console.log("Edit")
+      console.log(this.CData)
       this.form = this.fb.group({
         id: this.CData.id,
-        clientId: this.CData.clientId,
-        salutation: [this.CData.salutation, Validators.required],
+        customerId: this.CData.customerId,
+        salutationId: [this.CData.salutationId, Validators.required],
         firstName: [this.CData.firstName, Validators.required],
         lastName: [this.CData.lastName],
         addressLine1: [this.CData.address1, Validators.required],
@@ -81,16 +85,18 @@ export class ClientEditViewContactDetailsComponent implements OnInit {
         cEmail: [this.CData.cEmail, [Validators.required, Validators.email]],
         isPrimary: [this.CData.isPrimary, Validators.required],
         cPhone: [this.CData.cPhone, Validators.required],
-        communicationType: [this.CData.communicationType]
+        communicationTypeId: [this.CData.communicationTypeId]
       });
     }
   }
 
   SubmitForm() {
+    console.log(this.form.value)
     // bind actual api when available ask rahul about ctreate contact api
       if (this.title = 'Add Contact Details') {
         this.service.createContact(this.form.value).subscribe(p => {
           if (p) {
+           // this.service.contactSubmitEvent.next(true)
             this.snackbar.showSnackbarTopPosition('Saved Successfully', 'Dismiss')
             this.close();
           }

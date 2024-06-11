@@ -1,8 +1,3 @@
-<!-- <h6 class="mb-0 text-uppercase">Country Master</h6>
-<div class="example-button-row">
-    <button mat-flat-button color="primary">Add</button>
-</div> -->
-
 <div class="container">
     <div class="row">
         <div class="col-sm-11">
@@ -10,13 +5,12 @@
         </div>
 
         <div class="col-sm-1">
-            <button mat-flat-button class="btn-green" color="success" (click)="add()" >Add</button>
+            <button mat-flat-button class="btn-green" color="success" (click)="add()">Add</button>
         </div>
 
     </div>
 </div>
 <hr>
-
 <mat-card>
     <mat-card-content>
         <div class="d-flex flex-row gap-3 align-items-center justify-content-between">
@@ -46,7 +40,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Search</mat-label>
-            <input matInput (keyup)="applyFilter($event)"  #input>
+            <input matInput (keyup)="applyFilter($event)" #input>
         </mat-form-field>
 
         <div class="sorting-table table-responsive">
@@ -54,7 +48,7 @@
 
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> SN.NO </th>
-                    <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}}  </td>
+                    <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </td>
                 </ng-container>
 
 

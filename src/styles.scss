@@ -6,10 +6,22 @@
 // should be after your bootstrap imports, it uses bs4 variables, mixins, functions
 // @import 'ngx-toastr/toastr-bs4-alert';
 
+.danger {
+  color: red;
+}
+
+.active {
+  background: #e6fbf2 !important;
+  color: white !important;
+}
 
 .btn-green {
   background-color: #57b85c !important;
   color: white !important;
+}
+
+.ng-select.ng-invalid.ng-touched > .ng-select-container {
+  border-color: red !important;
 }
 
 .ng-select.ng-select-single .ng-select-container {
@@ -61,4 +73,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.mat-mdc-form-field-error-wrapper {
+  padding: 0px !important;
+}
+
+.mat-mdc-form-field-error {
+  font-size: 12px !important;
 }

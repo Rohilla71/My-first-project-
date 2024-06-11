@@ -38,7 +38,7 @@ export class CityListTestComponent implements OnInit {
 
 
   add(): void {
-    debugger
+    
 
     const dialogRef = this.dialog.open(CityCreateComponent, {
       width: '800px',
@@ -53,7 +53,7 @@ export class CityListTestComponent implements OnInit {
   }
 
   edit(city: any): void {
-    debugger
+    
     const dialogRef = this.dialog.open(CityCreateComponent, {
       data: { city },
       disableClose: true
@@ -66,17 +66,17 @@ export class CityListTestComponent implements OnInit {
   }
 
   delete(id: any): void {
-    debugger
+    
 
     this.service.DeleteCity(id).subscribe(p => {
-      debugger
+      
       if (p) {
         this.service.cities = p;
         //this.bindTable(this.service.cities);
       }
     }),
       error => {
-        debugger;
+        
         console.log(error);
       }
 
@@ -104,7 +104,7 @@ export class CityListTestComponent implements OnInit {
             .pipe(catchError(() => observableOf(null)));
         }),
         map((data) => {
-          debugger
+          
           this.isLoadingResults = false;
           this.isRateLimitReached = data === null;
 

@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 
 
 
-export class ClientListComponent implements AfterViewInit, OnInit {
+export class ClientListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'customerType', 'displayName', 'name', 'email', 'phone', 'mobile', 'currency', 'logo',
     'textTreatment', 'panno', 'language', 'taxPreference', 'country', 'state', 'city', 'postalCode', 'address1', 'address2',
     'accountNo', 'accountReference', 'termsConditions', 'disclaimer', 'landMark', 'lastActionBy', 'lastActionOn','actions'
@@ -56,10 +56,10 @@ export class ClientListComponent implements AfterViewInit, OnInit {
       }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  //   this.dataSource.sort = this.sort;
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

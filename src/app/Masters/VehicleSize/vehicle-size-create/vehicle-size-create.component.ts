@@ -29,13 +29,13 @@ export class VehicleSizeCreateComponent implements OnInit {
   ngOnInit(): void {
     // Create the currency form
     this.vehicleSizeForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      sizeInSqft: ['', Validators.required],
-      height: ['', Validators.required],
-      width: ['', Validators.required],
-      length: ['', Validators.required],
-      isActive: [true, Validators.required],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+      description: ['', Validators.maxLength(500)],
+      sizeInSqft: ['',Validators.pattern('^[0-9]+$')],
+      height: ['', Validators.pattern('^[0-9]+$')],
+      width: ['', Validators.pattern('^[0-9]+$')],
+      length: ['', Validators.pattern('^[0-9]+$')],
+      isActive: [true,],
     });
     this.userId = Number(localStorage.getItem('userId'));
     if (this.vehicleSizeData !== undefined) {
@@ -50,6 +50,11 @@ export class VehicleSizeCreateComponent implements OnInit {
       });
     }
   }
+
+  validateName(){
+    this.vehicleSizeForm.controls['name'].markAsTouched();
+  }
+
 
   SubmitForm() {
     if (this.vehicleSizeForm.valid) {

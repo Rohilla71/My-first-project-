@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { Observable, catchError, throwError } from 'rxjs';
+import { cityI } from 'src/app/Interfaces/City';
 import { environment } from 'src/environments/environment';
+import { StateList } from '../State/state.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CityService {
-  cities = [];
-  states = [];
+  cities : cityI[] = [];
+  states : StateList[] = [];
 
   constructor(private http: HttpClient) {}
 

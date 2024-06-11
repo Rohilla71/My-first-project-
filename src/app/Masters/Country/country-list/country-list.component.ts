@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -47,6 +47,7 @@ export class CountryListComponent implements OnInit {
   isLoading = true;
   dataSource: MatTableDataSource<CountryData>;
   // countries: CountryData[] = [];
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -67,8 +68,9 @@ export class CountryListComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {debugger
       this.GetCountryList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -81,6 +83,7 @@ export class CountryListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.GetCountryList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -120,7 +123,7 @@ export class CountryListComponent implements OnInit {
       }
     }),
       (error) => {
-        debugger
+        
         this.snackBarService.openSnackbar(error.message, "error");
         this.isLoading = false;
       };

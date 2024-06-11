@@ -69,72 +69,56 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> SN.NO </th>
                     <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </td>
                 </ng-container>
+                <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> COUNTRY </th>
+                    <td mat-cell *matCellDef="let row"> {{row.countryName !== null ? row.countryName : 'N/A'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="state">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> STATE </th>
+                    <td mat-cell *matCellDef="let row"> {{row.stateName !== null ? row.stateName : 'N/A'}} </td>
+                </ng-container>
 
-
-                <ng-container matColumnDef="cityId">
+                <ng-container matColumnDef="city">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> CITY </th>
-                    <td mat-cell *matCellDef="let row"> {{row.cityName}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.cityName !== null ? row.cityName : 'N/A'}} </td>
                 </ng-container>
 
 
                 <ng-container matColumnDef="postalCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> POSTAL CODE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.postalCode}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.postalCode !== null ? row.postalCode : 'N/A'}} </td>
                 </ng-container>
 
 
                 <ng-container matColumnDef="latitude">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> LATITUDE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.latitude}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.latitude !== null ? row.latitude :  'N/A'}} </td>
                 </ng-container>
-
-                <!-- 
-                <ng-container matColumnDef="currencyId">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CURRENCY_ID </th>
-                    <td mat-cell *matCellDef="let row"> {{row.currencyId}} </td>
-                </ng-container> -->
-
 
                 <ng-container matColumnDef="longitude">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> LONGITUDE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.longitude}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.longitude !== null ? row.longitude : 'row.longitude'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="isTaxApplicable">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> IS TAX APPLICABLE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.isTaxApplicable}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.isTaxApplicable}}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="taxRate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> TAX RATE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.taxRate}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.taxRate !== null ? row.taxRate : 'N/A'}} </td>
                 </ng-container>
-
-
-
-
-
-                <!-- <ng-container matColumnDef="timeZone">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TIME_ZONE </th>
-                    <td mat-cell *matCellDef="let row"> {{row.timeZone}} </td>
-                </ng-container> -->
-
-
-                <!-- <ng-container matColumnDef="flagEmoji">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FLAG_EMOJI </th>
-                    <td mat-cell *matCellDef="let row"> {{row.flagEmoji}} </td>
-                </ng-container> -->
-
-
 
                 <ng-container matColumnDef="description" style="width: 100px;">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.description !== null ? row.description : 'N/A'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="lastActionBy">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> LAST ACTION BY </th>
-                    <td mat-cell *matCellDef="let row"> {{row.lastActionBy}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.lastActionBy !== null ? row.lastActionBy :'N/A'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="lastActionOn">

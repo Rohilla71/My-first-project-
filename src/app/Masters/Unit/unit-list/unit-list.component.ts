@@ -1,12 +1,11 @@
 import { UnitService } from './../unit.service';
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CreateUnitListComponent } from '../create-unit-list/create-unit-list.component';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-// import { CityCreateComponent } from '../city-create/city-create.component';
 
 export interface UnitListData {
   id: number;
@@ -33,6 +32,8 @@ export class UnitListComponent implements OnInit {
   ];
   isLoading = true;
   unitList = [];
+
+  @ViewChild('input') input: ElementRef<any>;
   dataSource: MatTableDataSource<UnitListData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -54,6 +55,7 @@ export class UnitListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getUnitList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -65,6 +67,7 @@ export class UnitListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getUnitList();
+      this.input.nativeElement.value = "";
     });
   }
 

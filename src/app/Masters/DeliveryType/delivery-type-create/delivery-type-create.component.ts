@@ -31,10 +31,12 @@ export class DeliveryTypeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.deliveryTypeForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+      description: ['', [Validators.required]],
       isActive: [true, Validators.required],
     });
+    this.deliveryTypeForm.markAllAsTouched();
+
     this.userId = Number(localStorage.getItem('userId'));
     if (this.deliveryTypeData !== undefined) {
       this.deliveryTypeForm.patchValue({
@@ -43,6 +45,10 @@ export class DeliveryTypeCreateComponent implements OnInit {
         isActive: this.deliveryTypeData.isActive,
       });
     }
+  }
+
+  validateName(){
+    this.deliveryTypeForm.controls['name'].markAsTouched();
   }
 
   SubmitForm() {

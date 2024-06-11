@@ -31,11 +31,12 @@ export class CurrencyCreateComponent implements OnInit {
   ngOnInit(): void {
     // Create the currency form
     this.currencyForm = this._formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
       code: ['', Validators.required],
       symbol: ['', Validators.required],
       isActive: [true, Validators.required],
     });
+
     this.userId = Number(localStorage.getItem('userId'));
     if (this.currencyData !== undefined) {
       this.currencyForm.patchValue({
@@ -47,7 +48,12 @@ export class CurrencyCreateComponent implements OnInit {
     }
   }
 
+  validateName(){
+    this.currencyForm.controls['name'].markAsTouched();
+  }
+
   SubmitForm() {
+    this.currencyForm.markAllAsTouched();
     if (this.currencyForm.valid) {
       if (this.currencyData !== undefined && this.currencyData !== null) {
         const payload = {

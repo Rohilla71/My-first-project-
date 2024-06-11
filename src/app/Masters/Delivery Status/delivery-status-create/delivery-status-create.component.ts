@@ -26,58 +26,68 @@ export class DeliveryStatusCreateComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     public deliveryStatusService: DeliveryStatusService,
-    public snackBarService : SnackBarService
+    public snackBarService: SnackBarService
   ) {
-
     this.DSData = data?.country;
     if (!this.DSData) {
       this.form = this.fb.group({
         id: 0,
-        name: [''],
-        description: [''],
-        sequence: [''],
+        name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+        description: ['', Validators.maxLength(200)],
+        sequence: ['', Validators.required],
         isActive: [true],
       });
     } else {
-      
       this.form = this.fb.group({
         id: this.DSData.id,
-        name: [this.DSData.name],
-        description: [this.DSData.description],
-        sequence: [this.DSData.sequence],
+        name: [this.DSData.name, Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])],
+        description: [this.DSData.description, [Validators.maxLength(200)]],
+        sequence: [this.DSData.sequence, [Validators.required]],
         isActive: [this.DSData.isActive],
       });
     }
   }
 
+  validateName(){
+    this.form.controls['name'].markAsTouched();
+  }
+
   SubmitForm() {
+    
     if (this.form.valid) {
       if (this.form.value.id == 0) {
-        this.deliveryStatusService.CreateDelieveryStatus(this.form.value).subscribe((p) => {
-          if (p) {
-            this.snackBarService.openSnackbar("Delivery Saved Successfully", "success");
-            this.close();
-          }
-        }),
+        this.deliveryStatusService
+          .CreateDelieveryStatus(this.form.value)
+          .subscribe((p) => {
+            if (p) {
+              this.snackBarService.openSnackbar(
+                'Delivery Saved Successfully',
+                'success'
+              );
+              this.close();
+            }
+          }),
           (error) => {
-            this.snackBarService.openSnackbar(error.message, "error");
+            this.snackBarService.openSnackbar(error.message, 'error');
           };
       } else {
-        this.deliveryStatusService.UpdateDelieveryStatus(
-          this.form.value.id,
-          this.form.value
-        ).subscribe((p) => {
-          if (p) {
-            this.snackBarService.openSnackbar("Delivery Updated Successfully", "success");
-            this.close();
-          }
-        }),
+        this.deliveryStatusService
+          .UpdateDelieveryStatus(this.form.value.id, this.form.value)
+          .subscribe((p) => {
+            if (p) {
+              this.snackBarService.openSnackbar(
+                'Delivery Updated Successfully',
+                'success'
+              );
+              this.close();
+            }
+          }),
           (error) => {
-            this.snackBarService.openSnackbar(error.message, "error");
+            this.snackBarService.openSnackbar(error.message, 'error');
           };
       }
     } else {
-      this.snackBarService.openSnackbar("Invalid Form", "error");
+      this.snackBarService.openSnackbar('Invalid Form', 'error');
       this.form.markAllAsTouched();
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,7 +7,6 @@ import { InvoiceTermService } from '../invoice-term.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceTermCreateComponent } from '../invoice-term-create/invoice-term-create.component';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-import { error } from 'jquery';
 
 @Component({
   selector: 'app-invoice-term-list',
@@ -27,6 +26,9 @@ export class InvoiceTermListComponent implements OnInit {
     'lastActionOn',
     'actions',
   ];
+
+  
+@ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -72,6 +74,7 @@ export class InvoiceTermListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllInvoiceTermList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -98,6 +101,7 @@ export class InvoiceTermListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllInvoiceTermList();
+      this.input.nativeElement.value = "";
     });
   }
 

@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <form [formGroup]="form">
-                    <div class="row g-3">
+                    <div class="row">
 
                         <div class="col-12 col-md-6 col-lg-6 mb-3">
                             <div class="form-group">
@@ -21,15 +21,21 @@
                                     [searchable]="true" clearAllText="Clear" formControlName="countryId"
                                     placeholder="Country" (change)="onCountryChange($event)">
                                 </ng-select>
+                                <mat-error *ngIf="form.get('countryId').hasError('required') && form.get('countryId').touched">
+                                    Country is required
+                                </mat-error>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 mb-3">
                             <div class="form-group">
                                 <ng-select [items]="stateList" bindLabel="name" bindValue="id" 
                                     [multiple]="false" [searchable]="true" clearAllText="Clear"
-                                    formControlName="stateId" placeholder="Select State"
+                                    formControlName="stateId" placeholder="State"
                                     (change)="onStateChange($event)">
                                 </ng-select>
+                                <mat-error *ngIf="form.get('stateId').hasError('required') && form.get('stateId').touched">
+                                    State is required
+                                </mat-error>
                             </div>
                         </div>
                     </div>
@@ -38,18 +44,23 @@
                             <div class="form-group">
                                 <ng-select [items]="cityList" bindLabel="name" bindValue="id"
                                     [multiple]="false" [searchable]="true" clearAllText="Clear"
-                                    formControlName="cityId" placeholder="Select City"
+                                    formControlName="cityId" placeholder="City"
                                     (change)="onCityChange($event)">
                                 </ng-select>
+                                <mat-error *ngIf="form.get('cityId').hasError('required') && form.get('cityId').touched">
+                                    City is required
+                                </mat-error>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 mb-3">
                             <div class="form-group">
-                                <ng-select [items]="postCodeList" bindLabel="postalCode" bindValue="id"
+                                <ng-select [items]="postCodeList" bindLabel="postalCode" bindValue="postalCode"
                                     [multiple]="false" [searchable]="true" clearAllText="Clear"
-                                    formControlName="postalCode" placeholder="Select PostalCode"  (change)="onPostalCodeChange($event)"
-                                >
+                                    formControlName="postalCode" placeholder="PostalCode">
                                 </ng-select>
+                                <mat-error *ngIf="form.get('postalCode').hasError('required') && form.get('postalCode').touched">
+                                    Postal code is required
+                                </mat-error>
                             </div>
                         </div>
                     </div>
@@ -58,14 +69,14 @@
                         <div class="col-12 col-md-6 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Latitude</mat-label>
-                                <input matInput formControlName="latitude" />
+                                <input matInput formControlName="latitude" type="number"/>
                                 <mat-icon matSuffix>edit_location</mat-icon>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Longitude</mat-label>
-                                <input matInput formControlName="longitude" />
+                                <input matInput formControlName="longitude" type="number"/>
                                 <mat-icon matSuffix>edit_location</mat-icon>
                             </mat-form-field>
                         </div>
@@ -74,15 +85,21 @@
                         <div class="col-12 col-md-6 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Tax Rate</mat-label>
-                                <input matInput formControlName="taxRate" />
+                                <input matInput formControlName="taxRate" maxlength=5/>
                                 <mat-icon matSuffix>attach_money</mat-icon>
+                                <mat-error *ngIf="form.get('taxRate').hasError('maxlength')">
+                                    Tax Rate must not exceed 2 characters
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Description</mat-label>
-                                <input matInput formControlName="description" />
+                                <input matInput formControlName="description" maxlength=500/>
                                 <mat-icon matSuffix> sms</mat-icon>
+                                <mat-error *ngIf="form.get('description').hasError('maxlength')">
+                                    Description must not exceed 500 characters
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -105,6 +122,7 @@
                                 </mat-slide-toggle>
                             </section>
                         </div>
+                        
                         <mat-dialog-actions class="d-flex gap-3 button-container" align="end">
                             <button mat-flat-button class="px-4 btn-green" type="button" (click)="SubmitForm()">
                                 Submit

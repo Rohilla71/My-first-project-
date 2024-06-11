@@ -16,7 +16,7 @@
                         <div class="col-12 col-md-6">
                             <mat-form-field class="w-100" appearance="outline">
                                 <mat-label>Name</mat-label>
-                                <input matInput formControlName="name" />
+                                <input matInput formControlName="name" (keypress)="validateName()"/>
                             </mat-form-field>
                         </div>
                         <div class="col-12 col-md-6">
@@ -46,6 +46,7 @@
                                 Reset
                             </button>
                         </mat-dialog-actions>
+                        
                     </div>
                 </form>
             </mat-card-content>

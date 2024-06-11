@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CurrencyCreateComponent } from '../currency-create/currency-create.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,6 +27,8 @@ export class CurrencyListComponent implements OnInit {
     'lastActionOn',
     'actions',
   ];
+
+  @ViewChild('input') input: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
@@ -82,6 +84,7 @@ export class CurrencyListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllCurrencyList();
+      this.input.nativeElement.value = "";
     });
   }
 
@@ -94,6 +97,7 @@ export class CurrencyListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllCurrencyList();
+      this.input.nativeElement.value = "";
     });
   }
 

@@ -19,56 +19,71 @@ export interface TableData {
 @Component({
   selector: 'app-client-document-upload',
   templateUrl: './client-document-upload.component.html',
-  styleUrls: ['./client-document-upload.component.scss']
+  styleUrls: ['./client-document-upload.component.scss'],
 })
 export class ClientDocumentUploadComponent implements OnInit {
-  fileName: string
-  @Input() cid: number
+  fileName: string;
+  @Input() cid: number;
   displayedColumns: string[] = ['name', 'description', 'docPath'];
   isLoading = true;
   dataList = [];
-  public description = "";
+  public description = '';
   dataSource: MatTableDataSource<TableData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   base64string: any;
-  inputFile: any
-  constructor(private service: ClientService, public dialog: MatDialog, private snackBarService: SnackBarService) { }
+  inputFile: any;
+
+  constructor(
+    private service: ClientService,
+    public dialog: MatDialog,
+    private snackBarService: SnackBarService
+  ) {}
 
   ngOnInit() {
     //call api yo fetch file details in table
-    this.getFileUploadDetailsList()
+    this.getFileUploadDetailsList();
   }
-
 
   upload(): void {
-    // write api to submit the file details 
-    this.isLoading = true;
-    let formData: any = new FormData();
-    formData.append("File", this.inputFile);
-    formData.append("fileName", this.fileName);
-    formData.append("description", this.description);
-    formData.append("clientId", this.cid);
-    this.service.upload(formData).subscribe((p: any) => {
-      // if (p.success == true) {
-      this.isLoading = false;
-      this.snackBarService.showSnackbarTopPosition('Saved Successfully', 'Success');
-      this.getFileUploadDetailsList()
-      //  }
-    }),
-      error => {
+    debugger
+    if (this.inputFile != undefined) {
+      // write api to submit the file details
+      this.isLoading = true;
+      let formData: any = new FormData();
+      formData.append('File', this.inputFile);
+      formData.append('fileName', this.fileName);
+      formData.append('description', this.description);
+      formData.append('clientId', this.cid);
+      this.service.upload(formData).subscribe((p: any) => {
+        // if (p.success == true) {
         this.isLoading = false;
-        this.snackBarService.showSnackbarTopPosition(error.message, 'Dismiss');
-        console.log(error);
-      }
-
-
+        this.snackBarService.showSnackbarTopPosition(
+          'Saved Successfully',
+          'Success'
+        );
+        this.inputFile = undefined;
+        this.getFileUploadDetailsList();
+        //  }
+      }),
+        (error) => {
+          
+          this.isLoading = false;
+          this.snackBarService.showSnackbarTopPosition(
+            error.message,
+            'Dismiss'
+          );
+          console.log(error);
+        };
+    }
+    else{
+      this.snackBarService.showSnackbarTopPosition("No file found", "error")
+    }
   }
-
 
   fileUpload(event) {
     const file: File = event.target.files[0];
-    this.inputFile = file
+    this.inputFile = file;
     if (file) {
       this.fileName = file.name;
     }
@@ -79,18 +94,17 @@ export class ClientDocumentUploadComponent implements OnInit {
     this.service.getFileUploadListDetails(this.cid).subscribe((p: any) => {
       //  if (p.success == true) {
       this.isLoading = false;
-      this.dataList = p.documents  //need to revert once api avail
-      console.log(this.dataList)
+      this.dataList = p.documents; //need to revert once api avail
+      console.log(this.dataList);
       this.bindTable(this.dataList);
       // }
     }),
-      error => {
+      (error) => {
         this.isLoading = false;
         this.snackBarService.showSnackbarTopPosition(error.message, 'Dismiss');
         console.log(error);
-      }
-    this.isLoading = false
-
+      };
+    this.isLoading = false;
   }
 
   bindTable(data: any) {
@@ -114,6 +128,4 @@ export class ClientDocumentUploadComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 }
